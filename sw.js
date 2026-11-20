@@ -1,17 +1,18 @@
-/* Service worker do Mundinho das Letras — funciona offline.
+/* Service worker do Pequenos Gênios — funciona offline.
    Ao alterar qualquer arquivo do app, troque o número da VERSAO. */
-const VERSAO = "v2";
-const CACHE = "mundinho-" + VERSAO;
+const VERSAO = "v3";
+const CACHE = "pequenos-genios-" + VERSAO;
 const ARQUIVOS = [
   "./", "index.html", "manifest.webmanifest",
-  "fredoka-latin.woff2", "fredoka-latin-ext.woff2",
-  "192.png", "512.png", "maskable-512.png", "apple-touch-icon.png"
+  "fonts/fredoka-latin.woff2", "fonts/fredoka-latin-ext.woff2",
+  "mascotes/maia.webp", "mascotes/teo.webp", "mascotes/maia-head.webp", "mascotes/teo-head.webp",
+  "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "icons/apple-touch-icon.png"
 ];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARQUIVOS)).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith("mundinho-") && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => (k.startsWith("mundinho-") || k.startsWith("pequenos-genios-")) && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener("fetch", e => {
   const r = e.request;

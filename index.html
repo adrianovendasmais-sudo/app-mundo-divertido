@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" id="metaTema" content="#ffd9ec">
-<title>Meu Mundinho das Letras</title>
+<title>Pequenos Gênios</title>
 <meta name="description" content="Jogos de letras, números, cores e formas para crianças do Infantil 4 e 5.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Mundinho">
+<meta name="apple-mobile-web-app-title" content="Pequenos Gênios">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
@@ -72,7 +72,7 @@
   #somBtn{width:44px;height:44px;border-radius:50%;background:#fff;font-size:22px;box-shadow:0 2px 10px rgba(var(--rgb),.15)}
 
   #bia{position:relative;z-index:1;max-width:760px;margin:14px auto 0;padding:0 14px;display:flex;align-items:center;gap:6px}
-  #mascote{width:96px;height:96px;flex:none;animation:flutua 3s ease-in-out infinite;filter:drop-shadow(0 8px 8px rgba(var(--rgb),.25))}
+  #mascote{width:96px;height:96px;flex:none;object-fit:contain;animation:flutua 3s ease-in-out infinite;filter:drop-shadow(0 8px 8px rgba(var(--rgb),.25))}
   #mascote.feliz{animation:feliz .8s ease}
   #mascote.triste{animation:treme .5s ease}
   @keyframes flutua{50%{transform:translateY(-6px)}}
@@ -182,7 +182,7 @@
   #splash{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
     background:linear-gradient(160deg,#ffc9e3,#d9c8ff 60%,#bfe6ff)}
   .sp-bia{animation:flutua 3s ease-in-out infinite}
-  .sp-bia svg{width:180px;height:180px;filter:drop-shadow(0 10px 10px rgba(var(--rgb),.3))}
+  .sp-bia img{height:230px;width:auto;max-width:80vw;filter:drop-shadow(0 10px 10px rgba(var(--rgb),.3))}
   #splash h2{font-size:clamp(30px,9vw,48px);margin:6px 0 26px;color:var(--rosa-esc);line-height:1.1}
   .acao.peq{height:46px;font-size:17px;padding:0 18px;box-shadow:0 8px 14px -6px var(--rosa)}
   .acao.sec.peq{box-shadow:0 8px 14px -6px var(--ceu)}
@@ -239,6 +239,10 @@
   .rel{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;font-size:16px;margin:6px 0}
   .rel .barra{grid-column:1/-1;height:10px;border-radius:6px;background:#f3d6e4;overflow:hidden}
   .rel .barra i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#ff7eb6,#8f63f2)}
+  .sp-tema{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 14px}
+  .sp-tema span{font-weight:600;color:var(--suave);font-size:16px}
+  .sp-tema button{font-size:17px;font-weight:600;padding:8px 14px;border-radius:999px;background:#fff;color:var(--texto);box-shadow:0 2px 0 rgba(var(--rgb),.2);border:2px solid transparent}
+  .sp-tema button.on{border-color:var(--rosa);background:var(--rosa-claro)}
   .temas{display:flex;align-items:center;gap:8px;margin:-4px 0 14px;padding:8px 12px;border-radius:22px;background:rgba(255,255,255,.6)}
   .temas span{flex:1;font-size:14px;font-weight:600;color:var(--suave);line-height:1.1}
   .tema{width:40px;height:40px;border-radius:50%;font-size:20px;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 3px var(--c)}
@@ -342,7 +346,7 @@
     .opcoes{gap:10px;margin-top:12px}
     .opcao{min-height:96px;border-radius:24px}
     .opcao.cor{min-height:104px}
-    .sp-bia svg{width:140px;height:140px}
+    .sp-bia img{height:170px}
   }
   /* celular deitado: telas baixas */
   @media (max-height:520px) and (orientation:landscape){
@@ -398,7 +402,7 @@
 
 <header id="topo" class="vidro">
   <button id="voltarBtn" onclick="voltar()" aria-label="Voltar">⬅</button>
-  <h1>Meu Mundinho<br>das Letras</h1>
+  <h1>Pequenos<br>Gênios</h1>
   <div id="estrelaPill" title="Segure por 2 segundos para zerar (adulto)">
     <div class="anel" id="anel"><i>⭐</i></div>
     <div class="n" id="totalEstrelas">0</div>
@@ -407,17 +411,8 @@
 </header>
 
 <section id="bia">
-  <!-- Mascote original: Coelhinha Bia -->
-  <svg id="mascote" viewBox="0 0 100 100" aria-label="Coelhinha Bia" onclick="cliqueBia()">
-    <ellipse cx="34" cy="22" rx="11" ry="24" fill="#fff"/><ellipse cx="34" cy="24" rx="5" ry="16" fill="#ffb3d1"/>
-    <ellipse cx="66" cy="22" rx="11" ry="24" fill="#fff"/><ellipse cx="66" cy="24" rx="5" ry="16" fill="#ffb3d1"/>
-    <circle cx="50" cy="62" r="32" fill="#fff"/>
-    <circle cx="38" cy="58" r="4.5" fill="#5a2a47"/><circle cx="62" cy="58" r="4.5" fill="#5a2a47"/>
-    <circle cx="39.5" cy="56.5" r="1.4" fill="#fff"/><circle cx="63.5" cy="56.5" r="1.4" fill="#fff"/>
-    <circle cx="30" cy="70" r="6" fill="#ffb3d1" opacity=".7"/><circle cx="70" cy="70" r="6" fill="#ffb3d1" opacity=".7"/>
-    <path d="M44 70 Q50 77 56 70" stroke="#5a2a47" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 8 l3 7 7 1 -5 5 1 7 -6-4 -6 4 1-7 -5-5 7-1z" fill="#ffd966"/>
-  </svg>
+  <!-- Mascotes: Maia (Algodão-doce) e Teo (Galáxia) -->
+  <img id="mascote" src="mascotes/maia-head.webp" alt="Maia" width="96" height="96" onclick="cliqueBia()">
   <div id="balao" aria-live="polite" onclick="falar(ultimaFala)" title="Toque para ouvir de novo">Oi!</div>
 </section>
 
@@ -425,7 +420,10 @@
 <div id="splash" onclick="comecar()">
   <div>
     <div class="sp-bia" id="spBia"></div>
-    <h2>Meu Mundinho<br>das Letras</h2>
+    <h2>Pequenos<br>Gênios</h2>
+    <div class="sp-tema" id="spTema" onclick="event.stopPropagation()"><span>Eu sou:</span>
+      <button data-t="algodao" onclick="escolherSplash('algodao')">👧 Menina</button>
+      <button data-t="galaxia" onclick="escolherSplash('galaxia')">👦 Menino</button></div>
     <button class="acao" onclick="comecar()">▶ Começar</button>
   </div>
 </div>
@@ -632,7 +630,7 @@ function salvarNomeForm(modal){
   salvarNome(v);
   if(modal){ fecharModal(); inicio(); }
   else { telaNome(); }
-  bia("Que nome lindo! Prazer, "+nome+"! Eu sou a Bia!", "feliz");
+  bia("Que nome lindo! Prazer, "+nome+"! Eu sou "+MC().art+"!", "feliz");
 }
 function pularNome(){ gravarLS("nome_perguntado","1"); fecharModal(); }
 function perguntarNome(){
@@ -778,7 +776,7 @@ function alternarSom(){
 var ultimaFala = "";
 function cliqueBia(){
   if(typeof R !== "undefined" && R && R.q && !R.travado) return bia(R.q.fala, "feliz");
-  bia(sorteia(['Oi! Eu sou a Bia!','Vamos brincar?','Eu adoro aprender com você!']), 'feliz');
+  bia(sorteia(['Oi! Eu sou '+MC().art+'!','Vamos brincar?','Eu adoro aprender com você!']), 'feliz');
 }
 function bia(texto, humor){
   ultimaFala = texto;
@@ -884,22 +882,31 @@ function TILES5(){ return [
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
   ]; }
 function corTema(v){ try{ return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#ff5fa2"; }catch(e){ return "#ff5fa2"; } }
-var TEMAS = [["algodao","🍭","Algodão-doce","#ff5fa2"],["oceano","🌊","Oceano","#3a9be8"],["floresta","🌳","Floresta","#2fbf7f"],["sol","🌅","Pôr do sol","#ff8a3d"],["galaxia","🌌","Galáxia","#8f63f2"]];
-function temaAtual(){ const t = lerLS("tema") || "algodao"; return TEMAS.some(x=>x[0]===t) && (t !== "galaxia" || idade()==="5") ? t : "algodao"; }
+var TEMAS = [["algodao","👧","Menina · Algodão-doce","#ff5fa2"],["galaxia","👦","Menino · Galáxia","#8f63f2"],["oceano","🌊","Oceano","#3a9be8"],["floresta","🌳","Floresta","#2fbf7f"],["sol","🌅","Pôr do sol","#ff8a3d"]];
+function temaAtual(){ const t = lerLS("tema") || "algodao"; return TEMAS.some(x=>x[0]===t) ? t : "algodao"; }
 function aplicarTema(){
+  aplicarMascote();
   const t = temaAtual(), el = document.documentElement;
   if(t === "algodao") el.removeAttribute("data-tema"); else el.setAttribute("data-tema", t);
   const m = document.getElementById("metaTema"); if(m) m.content = ({algodao:"#ffd9ec",oceano:"#cfe9ff",floresta:"#d3f5e3",sol:"#ffe0c8",galaxia:"#e2d6ff"})[t];
 }
+function escolherSplash(t){
+  gravarLS("tema", t); gravarLS("mascote", t==="galaxia" ? "teo" : "maia"); aplicarTema(); marcarSplash();
+}
+function marcarSplash(){
+  const at = temaAtual();
+  document.querySelectorAll("#spTema button").forEach(b=>b.classList.toggle("on", b.dataset.t===at));
+}
 function escolherTema(t){
-  if(t === "galaxia" && idade() !== "5"){ bia("A Galáxia é um presente de quem evolui! Complete a jornada do Infantil 4 e ela fica liberada!"); return; }
+  if(t === "algodao") gravarLS("mascote","maia"); else if(t === "galaxia") gravarLS("mascote","teo");
   gravarLS("tema", t); aplicarTema(); inicio();
-  bia("Que cor linda! Gostei "+(({floresta:"da ",galaxia:"da "})[t]||"do ")+TEMAS.find(x=>x[0]===t)[2]+"!", "feliz");
+  const nm = TEMAS.find(x=>x[0]===t)[2];
+  bia(t==="algodao" ? "Oi! Eu sou a Maia! Vamos brincar?" : t==="galaxia" ? "Oi! Eu sou o Teo! Vamos explorar?" : "Que cor linda! Gostei "+(({floresta:"da ",galaxia:"da "})[t]||"do ")+nm+"!", "feliz");
 }
 function temaHTML(){
   const at = temaAtual();
-  return `<div class="temas pop"><span>Cor do mundinho</span>${TEMAS.map(t=>{
-    const trava = t[0]==="galaxia" && idade()!=="5";
+  return `<div class="temas pop"><span>Tema</span>${TEMAS.map(t=>{
+    const trava = false;
     return `<button class="tema ${t[0]===at?"on":""} ${trava?"trava":""}" style="--c:${t[3]}" title="${t[2]}" onclick="escolherTema('${t[0]}')">${trava?"🔒":t[1]}</button>`; }).join("")}</div>`;
 }
 function inicio(){
@@ -921,7 +928,7 @@ function inicio(){
     ["quantidade","Mais ou menos","Qual tem mais?","#9fd8ff","#4aa8f0","⚖️"],
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
   ]);
-  const frase = "Oi"+virgulaNome()+"! Eu sou a Bia! Vamos brincar e aprender juntos? Escolha uma brincadeira!";
+  const frase = "Oi"+virgulaNome()+"! Eu sou "+MC().art+"! Vamos brincar e aprender juntos? Escolha uma brincadeira!";
   if(!saudacaoFeita) bia(frase);                       /* só fala na primeira vez */
   else document.getElementById("balao").textContent = "Escolha uma brincadeira"+virgulaNome()+"!";
 }
@@ -1350,7 +1357,7 @@ var GERADORES = {
     if(Math.random() < pOuvir){   /* ouvir o número e achar */
       return { tipo:"num", id, opcoes:ops, acerto:`Esse é o número ${NOMES_NUM[n]}!`,
         fala:`Toque no número ${NOMES_NUM[n]}!`,
-        topo:`<div class="palavra">Toque no número que a Bia falou</div><button class="acao" style="margin-top:10px" onclick="falar('Toque no número ${NOMES_NUM[n]}!')">🔊 Ouvir de novo</button>` };
+        topo:`<div class="palavra">Toque no número que ${MC().art} falou</div><button class="acao" style="margin-top:10px" onclick="falar('Toque no número ${NOMES_NUM[n]}!')">🔊 Ouvir de novo</button>` };
     }
     const ic = sorteia(ICONES_CONTAGEM);
     return { tipo:"num", id, opcoes:ops, acerto:`Tem ${NOMES_NUM[n]}! Você contou direitinho!`,
@@ -1431,7 +1438,7 @@ var GERADORES = {
     }
     return { tipo:"letra", id:"sílaba "+s, acerto:`É ${fala}! A letra ${c} com a letra ${v} faz ${fala}!`,
       fala:`Ouça com atenção: ${fala}. ${fala}. Qual sílaba eu falei?`,
-      topo:`<div class="palavra">Qual sílaba a Bia falou?</div><button class="acao" style="margin-top:10px" onclick="falar('${fala}. ${fala}')">🔊 Ouvir de novo</button>`,
+      topo:`<div class="palavra">Qual sílaba ${MC().art} falou?</div><button class="acao" style="margin-top:10px" onclick="falar('${fala}. ${fala}')">🔊 Ouvir de novo</button>`,
       opcoes: ops.map(o=>({html:o, ok:o===s})) };
   }
 };
@@ -1519,10 +1526,16 @@ try{
   if(window.google && google.script && google.script.run)
     google.script.run.withSuccessHandler(b=>{ if(!b) nuvemOK = false; }).withFailureHandler(()=>{ nuvemOK = false; }).tts("Oi");
 }catch(e){}
-(function(){
-  const sp = document.getElementById("spBia"), m = document.getElementById("mascote");
-  sp.innerHTML = m.outerHTML.replace(/id="mascote"/,"").replace(/onclick="[^"]*"/,"");
-})();
+/* ---- mascotes: Maia (menina) e Teo (menino) ---- */
+var MASCOTES = {maia:{nome:"Maia", art:"a Maia", cabeca:"mascotes/maia-head.webp", inteiro:"mascotes/maia.webp"},
+                teo:{nome:"Teo", art:"o Teo", cabeca:"mascotes/teo-head.webp", inteiro:"mascotes/teo.webp"}};
+function mascoteId(){ const m = lerLS("mascote"); return MASCOTES[m] ? m : "maia"; }
+function MC(){ return MASCOTES[mascoteId()]; }
+function aplicarMascote(){
+  const c = MC(), m = document.getElementById("mascote"), sp = document.getElementById("spBia");
+  if(m){ m.src = c.cabeca; m.alt = c.nome; }
+  if(sp) sp.innerHTML = '<img src="'+c.inteiro+'" alt="'+c.nome+'">';
+}
 function comecar(){
   if(comecou) return; comecou = true;
   const s = document.getElementById("splash"); if(s) s.remove();
@@ -2053,7 +2066,7 @@ function copiarTexto(t){
 }
 function compartilharRelatorio(){
   const t = textoRelatorio();
-  try{ if(navigator.share){ navigator.share({title:"Relatório do Mundinho das Letras", text:t}).catch(()=>copiarTexto(t)); return; } }catch(e){}
+  try{ if(navigator.share){ navigator.share({title:"Relatório do Pequenos Gênios", text:t}).catch(()=>copiarTexto(t)); return; } }catch(e){}
   copiarTexto(t);
 }
 
@@ -2093,7 +2106,7 @@ function exportarArquivo(){
   const blob = new Blob([JSON.stringify({app:"mundinho",v:1,dados:JSON.parse(coletarProgresso())})], {type:"application/json"});
   const a = document.createElement("a"), d = new Date();
   a.href = URL.createObjectURL(blob);
-  a.download = "mundinho-backup-"+d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+".json";
+  a.download = "pequenos-genios-backup-"+d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+".json";
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
   gravarLS("sync_ts", String(Date.now()));
 }
@@ -2101,8 +2114,8 @@ function importarArquivo(inp){
   const f = inp.files && inp.files[0]; if(!f) return;
   const r = new FileReader();
   r.onload = ()=>{
-    let j; try{ j = JSON.parse(r.result); }catch(e){ alert("Esse arquivo não parece um backup do Mundinho."); return; }
-    if(!j || j.app!=="mundinho" || !j.dados || typeof j.dados!=="object"){ alert("Esse arquivo não parece um backup do Mundinho."); return; }
+    let j; try{ j = JSON.parse(r.result); }catch(e){ alert("Esse arquivo não parece um backup do Pequenos Gênios."); return; }
+    if(!j || j.app!=="mundinho" || !j.dados || typeof j.dados!=="object"){ alert("Esse arquivo não parece um backup do Pequenos Gênios."); return; }
     if(!confirm("Isso troca o progresso deste aparelho pelo do arquivo. Continuar?")) return;
     aplicarBackup(j.dados);
   };
@@ -2237,7 +2250,7 @@ function blocoVoz(){
   const vs = vozesPT();
   const op = vs.map(v=>`<option value="${v.name}" ${vozEscolhida && vozEscolhida.name===v.name ? "selected" : ""}>${v.name}</option>`).join("");
   const est = "width:100%;font:inherit;font-size:16px;padding:10px;border-radius:14px;border:2px solid var(--rosa-claro);background:#fff;color:var(--texto)";
-  return `<p style="font-size:17px;margin:18px 0 6px"><b>Voz da Bia (neste aparelho)</b></p>
+  return `<p style="font-size:17px;margin:18px 0 6px"><b>Voz de ${MC().nome} (neste aparelho)</b></p>
     ${vs.length
       ? `<select style="${est}" onchange="mudarVoz(this.value)">${op}</select>`
       : `<div style="font-size:15px;color:var(--suave)">Nenhuma voz em português do Brasil encontrada neste aparelho.</div>`}
@@ -2253,7 +2266,7 @@ function mudarVoz(nomeVoz){
 }
 function mudarTom(x){ vozTom = parseFloat(x); gravarLS("voz_tom", vozTom); document.getElementById("tomV").textContent = vozTom.toFixed(2); }
 function mudarVel(x){ vozVel = parseFloat(x); gravarLS("voz_vel", vozVel); document.getElementById("velV").textContent = vozVel.toFixed(2); }
-function testarVozAparelho(){ pararFala(); falarNavegador("Oi! Eu sou a Bia! Vamos brincar e aprender juntos?"); }
+function testarVozAparelho(){ pararFala(); falarNavegador("Oi! Eu sou "+MC().art+"! Vamos brincar e aprender juntos?"); }
 
 function zerarEstrelas(){ if(confirm("Zerar as estrelas?")){ estrelas=0; gravarLS("estrelas_mundinho",0); atualizarEstrelas(); painelPais(); } }
 function zerarHistorico(){ if(confirm("Apagar o histórico de acertos e erros?")){ stats={}; gravarLS("stats","{}"); painelPais(); } }
@@ -2283,6 +2296,7 @@ function descanso(){
 
 /* ---- primeira tela (por último, depois de tudo declarado) ---- */
 try{ if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{})); }catch(e){}
+try{ marcarSplash(); }catch(e){}
 try{ atualizarEstrelas(); ir("inicio"); }catch(e){ console.error(e); throw e; }
 </script>
 </body>
