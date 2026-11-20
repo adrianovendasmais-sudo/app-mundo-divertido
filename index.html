@@ -26,12 +26,13 @@
     --g1:#ffc9e3; --g2:#d9c8ff; --g3:#bfe6ff; --g4:#ffe2b8; --gbase:#fff4fa;
     --vidro:rgba(255,255,255,.7); --borda:rgba(255,255,255,.92);
     --sombra:0 10px 30px rgba(var(--rgb),.16);
+    --tile-a:#f78fc2; --tile-b:#dc438f;
   }
   /* temas de cor */
   :root[data-tema="oceano"]{--rosa:#3a9be8; --rosa-esc:#1f6fc0; --rosa-claro:#dcefff; --lilas:#7a8cf5; --rgb:31,111,192; --texto:#1f3556; --suave:#4f7194;
-    --g1:#bfe6ff; --g2:#d4dcff; --g3:#c4f1ec; --g4:#fff1c9; --gbase:#f2f9ff}
+    --g1:#bfe6ff; --g2:#d4dcff; --g3:#c4f1ec; --g4:#fff1c9; --gbase:#f2f9ff;--tile-a:#65b9f3;--tile-b:#2779d0}
   :root[data-tema="floresta"]{--rosa:#2fbf7f; --rosa-esc:#17895a; --rosa-claro:#dcf7e9; --lilas:#7bcf5a; --rgb:23,137,90; --texto:#1d4034; --suave:#4f8068;
-    --g1:#c8f3dc; --g2:#e6f5b8; --g3:#bfe9ff; --g4:#fff0c2; --gbase:#f3fff8}
+    --g1:#c8f3dc; --g2:#e6f5b8; --g3:#bfe9ff; --g4:#fff0c2; --gbase:#f3fff8;--tile-a:#66ce99;--tile-b:#21885c}
   :root[data-tema="sol"]{--rosa:#ff8a3d; --rosa-esc:#d9570f; --rosa-claro:#ffe8d6; --lilas:#ff5f7e; --rgb:217,87,15; --texto:#4a2a1c; --suave:#8f5f48;
     --g1:#ffd9b8; --g2:#ffc9d6; --g3:#fff0b8; --g4:#e5d4ff; --gbase:#fff7f0}
   :root[data-tema="galaxia"]{--rosa:#8f63f2; --rosa-esc:#6238c9; --rosa-claro:#ece3ff; --lilas:#ff5fa2; --rgb:98,56,201; --texto:#2f2050; --suave:#6e5f94;
@@ -420,16 +421,20 @@
 </section>
 
 <main id="app"></main>
-<div id="splash" onclick="comecar()">
-  <div>
-    <div class="sp-bia" id="spBia"></div>
-    <h2>Pequenos<br>Gênios</h2>
-    <div class="sp-perfis" id="spPerfis" onclick="event.stopPropagation()"></div>
-    <div class="sp-tema" id="spTema" onclick="event.stopPropagation()">
-      <button data-t="algodao" onclick="escolherSplash('algodao')">👧 Menina</button>
-      <button data-t="oceano" onclick="escolherSplash('oceano')">👦 Menino</button>
-      <button data-t="floresta" onclick="escolherSplash('floresta')">🌿 Neutro</button></div>
-    <button class="acao" onclick="comecar()">▶ Entrar</button>
+<div id="splash" class="login-universos">
+  <div class="login-shell">
+    <div class="login-brand">
+      <span class="brand-stars">✦ ✧ ✦</span><div class="brand-mark">PG</div>
+      <p class="brand-kicker">UM UNIVERSO DE DESCOBERTAS</p>
+      <h2>Pequenos <span>Gênios</span></h2>
+      <p class="login-subtitle">Escolha seu amigo para começar a aventura!</p>
+    </div>
+    <div class="login-cards">
+      <button class="login-card login-maia" onclick="entrarPerfil('1')"><span class="login-tag">MUNDO ALGODÃO</span><img src="maia.webp" alt="Maia"><strong>Maia</strong><small>Um mundo doce e colorido</small><span class="login-enter">Entrar no meu mundo <b>→</b></span></button>
+      <button class="login-card login-teo" onclick="entrarPerfil('2')"><span class="login-tag">MUNDO GALÁXIA</span><img src="teo.webp" alt="Teo"><strong>Teo</strong><small>Explorar, descobrir e aprender</small><span class="login-enter">Entrar no meu mundo <b>→</b></span></button>
+      <button class="login-card login-capi" onclick="entrarPerfil('3')"><span class="login-tag">MUNDO FLORESTA</span><img src="capi.webp" alt="Capi"><strong>Capi</strong><small>Natureza cheia de descobertas</small><span class="login-enter">Entrar no meu mundo <b>→</b></span></button>
+    </div>
+    <p class="login-foot">Cada criança tem seu próprio perfil e progresso ⭐</p>
   </div>
 </div>
 <div id="modal"></div>
@@ -855,7 +860,7 @@ function ir(t){
 /* ---- Início ---- */
 function tilesHTML(lista){
   return `<div class="tiles pop">${lista.map(t=>
-    `<button class="tile ${t[6]||""}" style="--a:${t[3]};--b:${t[4]}" onclick="ir('${t[0]}')"><span class="ico">${t[5]}</span><span>${t[1]}</span><small>${t[2]}</small></button>`).join("")}</div>`;
+    `<button class="tile ${t[6]||""}" style="--a:var(--tile-a);--b:var(--tile-b)" onclick="ir('${t[0]}')"><span class="ico">${t[5]}</span><span>${t[1]}</span><small>${t[2]}</small></button>`).join("")}</div>`;
 }
 var saudacaoFeita = false;
 function idade(){ const v = lerLS("idade"); return (v === "5" || v === "6") ? "5" : "4"; }
@@ -888,35 +893,28 @@ function TILES5(){ return [
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
   ]; }
 function corTema(v){ try{ return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#ff5fa2"; }catch(e){ return "#ff5fa2"; } }
-var TEMAS = [["algodao","👧","Menina","#ff5fa2"],["oceano","👦","Menino","#3a9be8"],["floresta","🌿","Neutro","#2fbf7f"]];
-function temaAtual(){ let t = lerLS("tema") || "algodao"; t = ({galaxia:"oceano", sol:"floresta"})[t] || t; return TEMAS.some(x=>x[0]===t) ? t : "algodao"; }
+var TEMAS = [["algodao","🌸","Mundo Algodão","#ff5fa2"],["galaxia","🚀","Mundo Galáxia","#7658e8"],["floresta","🌿","Mundo Floresta","#2fbf7f"]];
+var PERFIS_UNIVERSO = {"1":{tema:"algodao",nome:"Maia"},"2":{tema:"galaxia",nome:"Teo"},"3":{tema:"floresta",nome:"Capi"}};
+function temaDoPerfil(id){ return (PERFIS_UNIVERSO[String(id)] || PERFIS_UNIVERSO["1"]).tema; }
+function temaAtual(){ return temaDoPerfil(PERFIL || "1"); }
 function aplicarTema(){
   aplicarMascote();
-  const t = temaAtual(), el = document.documentElement;
-  if(t === "algodao") el.removeAttribute("data-tema"); else el.setAttribute("data-tema", t);
-  const m = document.getElementById("metaTema"); if(m) m.content = ({algodao:"#ffd9ec",oceano:"#cfe9ff",floresta:"#d3f5e3",sol:"#ffe0c8",galaxia:"#e2d6ff"})[t];
+  const t=temaAtual(),el=document.documentElement;
+  if(t==="algodao") el.removeAttribute("data-tema"); else el.setAttribute("data-tema",t);
+  const m=document.getElementById("metaTema");
+  if(m) m.content=({algodao:"#ffd9ec",galaxia:"#e2d6ff",floresta:"#d3f5e3"})[t];
 }
-function escolherSplash(t){
-  gravarLS("tema", t); aplicarTema(); marcarSplash();
+function escolherSplash(t){ return false; }
+function marcarSplash(){}
+function escolherPerfilSplash(id){ entrarPerfil(id); }
+function entrarPerfil(id){
+  id=String(id); if(!PERFIS_UNIVERSO[id]) return;
+  try{let lista=JSON.parse(localStorage.getItem("perfis")||"[]");if(!Array.isArray(lista))lista=[];if(!lista.includes(id))lista.push(id);localStorage.setItem("perfis",JSON.stringify(lista));localStorage.setItem("perfil_atual",id);}catch(e){}
+  PERFIL=id; PREF=PERFIL==="1"?"":"p"+PERFIL+"_";
+  gravarLS("tema",temaDoPerfil(id)); recarregarEstado(); comecar();
 }
-function marcarSplash(){
-  const at = temaAtual(), pl = perfisLista(), box = document.getElementById("spPerfis");
-  if(box) box.innerHTML = pl.length > 1 ? pl.map(id=>`<button class="${id===PERFIL?"on":""}" onclick="escolherPerfilSplash('${id}')">${nomeDoPerfil(id) || "Criança "+id}</button>`).join("") : "";
-  document.querySelectorAll("#spTema button").forEach(b=>b.classList.toggle("on", b.dataset.t===at));
-}
-function escolherPerfilSplash(id){
-  gravarLS("perfil_atual", id); recarregarEstado(); marcarSplash();
-}
-function escolherTema(t){
-  gravarLS("tema", t); aplicarTema(); inicio();
-  bia("Oi! Eu sou "+MC().art+"! Vamos brincar?", "feliz");
-}
-function temaHTML(){
-  const at = temaAtual();
-  const cab = {algodao:"maia", oceano:"teo", floresta:"capi"};
-  return `<div class="temas pop"><span>Quem vai<br>brincar?</span>${TEMAS.map(t=>
-    `<button class="tema ${t[0]===at?"on":""}" style="--c:${t[3]}" title="${t[2]}" aria-label="${t[2]}" onclick="escolherTema('${t[0]}')"><img src="${MASCOTES[cab[t[0]]].cabeca}" alt=""></button>`).join("")}</div>`;
-}
+function escolherTema(t){ gravarLS("tema",temaDoPerfil(PERFIL)); aplicarTema(); inicio(); }
+function temaHTML(){ return ""; }
 function inicio(){
   aplicarTema();
   app.innerHTML = missaoHTML() + temaHTML() + tilesHTML(idade() === "5" ? TILES5() : [
@@ -1538,7 +1536,7 @@ try{
 var MASCOTES = {maia:{nome:"Maia", art:"a Maia", cabeca:"maia-head.webp", inteiro:"maia.webp"},
                 teo:{nome:"Teo", art:"o Teo", cabeca:"teo-head.webp", inteiro:"teo.webp"},
                 capi:{nome:"Capi", art:"a Capi", cabeca:"capi-head.webp", inteiro:"capi.webp"}};
-function mascoteId(){ return ({algodao:"maia", oceano:"teo", floresta:"capi"})[temaAtual()] || "maia"; }
+function mascoteId(){ return ({algodao:"maia", galaxia:"teo", floresta:"capi"})[temaAtual()] || "maia"; }
 function MC(){ return MASCOTES[mascoteId()]; }
 function aplicarMascote(){
   const c = MC(), m = document.getElementById("mascote"), sp = document.getElementById("spBia");
@@ -1993,7 +1991,7 @@ function registrar(id, ok){
 }
 
 /* ---- várias crianças no mesmo aparelho ---- */
-function perfisLista(){ try{ const o = JSON.parse(localStorage.getItem("perfis") || "null"); if(Array.isArray(o) && o.length) return o; }catch(e){} return ["1"]; }
+function perfisLista(){ try{const o=JSON.parse(localStorage.getItem("perfis")||"null");if(Array.isArray(o)&&o.length)return o.filter(id=>!!PERFIS_UNIVERSO[String(id)]);}catch(e){}return ["1","2","3"]; }
 function nomeDoPerfil(id){ try{ return localStorage.getItem((id==="1" ? "" : "p"+id+"_")+"nome_crianca") || ""; }catch(e){ return ""; } }
 function recarregarEstado(){
   PERFIL = lerLS("perfil_atual") || "1"; PREF = PERFIL === "1" ? "" : "p"+PERFIL+"_";
@@ -2002,15 +2000,12 @@ function recarregarEstado(){
   atualizarEstrelas(); aplicarTema();
 }
 function trocarPerfil(id){
-  gravarLS("perfil_atual", id); recarregarEstado(); fecharModal();
-  saudacaoFeita = false; ir("inicio"); saudacaoFeita = true;
-  setTimeout(perguntarNome, 700);
+  id=String(id); if(!PERFIS_UNIVERSO[id]) return;
+  gravarLS("perfil_atual",id); PERFIL=id; PREF=PERFIL==="1"?"":"p"+PERFIL+"_";
+  gravarLS("tema",temaDoPerfil(id)); recarregarEstado(); fecharModal();
+  saudacaoFeita=false; ir("inicio"); saudacaoFeita=true; setTimeout(perguntarNome,700);
 }
-function novoPerfil(){
-  const l = perfisLista(); if(l.length >= 4) return;
-  const id = ["1","2","3","4"].find(x=>!l.includes(x));
-  l.push(id); gravarLS("perfis", JSON.stringify(l)); trocarPerfil(id);
-}
+function novoPerfil(){const l=perfisLista();const id=["1","2","3"].find(x=>!l.includes(x));if(!id)return;l.push(id);gravarLS("perfis",JSON.stringify(l));trocarPerfil(id);}
 function apagarPerfil(id){
   if(id === PERFIL) return;
   if(!confirm("Apagar tudo de "+(nomeDoPerfil(id) || "Criança "+id)+"? Isso não pode ser desfeito.")) return;
