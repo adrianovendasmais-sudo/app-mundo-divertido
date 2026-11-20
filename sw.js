@@ -1,11 +1,11 @@
 /* Service worker do Mundinho das Letras — funciona offline.
    Ao alterar qualquer arquivo do app, troque o número da VERSAO. */
-const VERSAO = "v1";
+const VERSAO = "v2";
 const CACHE = "mundinho-" + VERSAO;
 const ARQUIVOS = [
   "./", "index.html", "manifest.webmanifest",
-  "fonts/fredoka-latin.woff2", "fonts/fredoka-latin-ext.woff2",
-  "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "icons/apple-touch-icon.png"
+  "fredoka-latin.woff2", "fredoka-latin-ext.woff2",
+  "192.png", "512.png", "maskable-512.png", "apple-touch-icon.png"
 ];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARQUIVOS)).then(() => self.skipWaiting()));
