@@ -11,12 +11,12 @@
 <meta name="apple-mobile-web-app-title" content="Pequenos Gênios">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="preload" href="fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/fredoka-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/fredoka-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fredoka-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fredoka-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 </style>
 <style>
   :root{
@@ -240,12 +240,15 @@
   .rel .barra{grid-column:1/-1;height:10px;border-radius:6px;background:#f3d6e4;overflow:hidden}
   .rel .barra i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#ff7eb6,#8f63f2)}
   .sp-tema{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 14px}
-  .sp-tema span{font-weight:600;color:var(--suave);font-size:16px}
+  .sp-perfis{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0 0 10px}
+  .sp-perfis button{font-size:16px;font-weight:600;padding:6px 14px;border-radius:999px;background:#fff;color:var(--texto);border:2px solid transparent;box-shadow:0 2px 0 rgba(var(--rgb),.2)}
+  .sp-perfis button.on{border-color:var(--rosa);background:var(--rosa-claro)}
   .sp-tema button{font-size:17px;font-weight:600;padding:8px 14px;border-radius:999px;background:#fff;color:var(--texto);box-shadow:0 2px 0 rgba(var(--rgb),.2);border:2px solid transparent}
   .sp-tema button.on{border-color:var(--rosa);background:var(--rosa-claro)}
   .temas{display:flex;align-items:center;gap:8px;margin:-4px 0 14px;padding:8px 12px;border-radius:22px;background:rgba(255,255,255,.6)}
   .temas span{flex:1;font-size:14px;font-weight:600;color:var(--suave);line-height:1.1}
-  .tema{width:40px;height:40px;border-radius:50%;font-size:20px;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 3px var(--c)}
+  .tema img{width:100%;height:100%;object-fit:contain;border-radius:50%;pointer-events:none}
+  .tema{width:46px;height:46px;overflow:hidden;border-radius:50%;font-size:20px;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 3px var(--c)}
   .tema.on{background:var(--c);box-shadow:0 0 0 3px #fff,0 0 0 6px var(--c);transform:scale(1.06)}
   .tema.trava{filter:grayscale(.6);opacity:.7}
   .nivelTag{font-weight:700}
@@ -412,7 +415,7 @@
 
 <section id="bia">
   <!-- Mascotes: Maia (Algodão-doce) e Teo (Galáxia) -->
-  <img id="mascote" src="mascotes/maia-head.webp" alt="Maia" width="96" height="96" onclick="cliqueBia()">
+  <img id="mascote" src="maia-head.webp" alt="Maia" width="96" height="96" onclick="cliqueBia()">
   <div id="balao" aria-live="polite" onclick="falar(ultimaFala)" title="Toque para ouvir de novo">Oi!</div>
 </section>
 
@@ -421,10 +424,12 @@
   <div>
     <div class="sp-bia" id="spBia"></div>
     <h2>Pequenos<br>Gênios</h2>
-    <div class="sp-tema" id="spTema" onclick="event.stopPropagation()"><span>Eu sou:</span>
+    <div class="sp-perfis" id="spPerfis" onclick="event.stopPropagation()"></div>
+    <div class="sp-tema" id="spTema" onclick="event.stopPropagation()">
       <button data-t="algodao" onclick="escolherSplash('algodao')">👧 Menina</button>
-      <button data-t="galaxia" onclick="escolherSplash('galaxia')">👦 Menino</button></div>
-    <button class="acao" onclick="comecar()">▶ Começar</button>
+      <button data-t="oceano" onclick="escolherSplash('oceano')">👦 Menino</button>
+      <button data-t="floresta" onclick="escolherSplash('floresta')">🌿 Neutro</button></div>
+    <button class="acao" onclick="comecar()">▶ Entrar</button>
   </div>
 </div>
 <div id="modal"></div>
@@ -724,6 +729,7 @@ function pararFala(){
 }
 function falar(texto){
   pararFala();
+  if(!comecou) return;                       /* sem voz até a criança entrar no perfil */
   if(mudo) return;
   const meu = ++tokenFala;
   if(nuvemOK && window.google && google.script && google.script.run){
@@ -882,8 +888,8 @@ function TILES5(){ return [
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
   ]; }
 function corTema(v){ try{ return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#ff5fa2"; }catch(e){ return "#ff5fa2"; } }
-var TEMAS = [["algodao","👧","Menina · Algodão-doce","#ff5fa2"],["galaxia","👦","Menino · Galáxia","#8f63f2"],["oceano","🌊","Oceano","#3a9be8"],["floresta","🌳","Floresta","#2fbf7f"],["sol","🌅","Pôr do sol","#ff8a3d"]];
-function temaAtual(){ const t = lerLS("tema") || "algodao"; return TEMAS.some(x=>x[0]===t) ? t : "algodao"; }
+var TEMAS = [["algodao","👧","Menina","#ff5fa2"],["oceano","👦","Menino","#3a9be8"],["floresta","🌿","Neutro","#2fbf7f"]];
+function temaAtual(){ let t = lerLS("tema") || "algodao"; t = ({galaxia:"oceano", sol:"floresta"})[t] || t; return TEMAS.some(x=>x[0]===t) ? t : "algodao"; }
 function aplicarTema(){
   aplicarMascote();
   const t = temaAtual(), el = document.documentElement;
@@ -891,23 +897,25 @@ function aplicarTema(){
   const m = document.getElementById("metaTema"); if(m) m.content = ({algodao:"#ffd9ec",oceano:"#cfe9ff",floresta:"#d3f5e3",sol:"#ffe0c8",galaxia:"#e2d6ff"})[t];
 }
 function escolherSplash(t){
-  gravarLS("tema", t); gravarLS("mascote", t==="galaxia" ? "teo" : "maia"); aplicarTema(); marcarSplash();
+  gravarLS("tema", t); aplicarTema(); marcarSplash();
 }
 function marcarSplash(){
-  const at = temaAtual();
+  const at = temaAtual(), pl = perfisLista(), box = document.getElementById("spPerfis");
+  if(box) box.innerHTML = pl.length > 1 ? pl.map(id=>`<button class="${id===PERFIL?"on":""}" onclick="escolherPerfilSplash('${id}')">${nomeDoPerfil(id) || "Criança "+id}</button>`).join("") : "";
   document.querySelectorAll("#spTema button").forEach(b=>b.classList.toggle("on", b.dataset.t===at));
 }
+function escolherPerfilSplash(id){
+  gravarLS("perfil_atual", id); recarregarEstado(); marcarSplash();
+}
 function escolherTema(t){
-  if(t === "algodao") gravarLS("mascote","maia"); else if(t === "galaxia") gravarLS("mascote","teo");
   gravarLS("tema", t); aplicarTema(); inicio();
-  const nm = TEMAS.find(x=>x[0]===t)[2];
-  bia(t==="algodao" ? "Oi! Eu sou a Maia! Vamos brincar?" : t==="galaxia" ? "Oi! Eu sou o Teo! Vamos explorar?" : "Que cor linda! Gostei "+(({floresta:"da ",galaxia:"da "})[t]||"do ")+nm+"!", "feliz");
+  bia("Oi! Eu sou "+MC().art+"! Vamos brincar?", "feliz");
 }
 function temaHTML(){
   const at = temaAtual();
-  return `<div class="temas pop"><span>Tema</span>${TEMAS.map(t=>{
-    const trava = false;
-    return `<button class="tema ${t[0]===at?"on":""} ${trava?"trava":""}" style="--c:${t[3]}" title="${t[2]}" onclick="escolherTema('${t[0]}')">${trava?"🔒":t[1]}</button>`; }).join("")}</div>`;
+  const cab = {algodao:"maia", oceano:"teo", floresta:"capi"};
+  return `<div class="temas pop"><span>Quem vai<br>brincar?</span>${TEMAS.map(t=>
+    `<button class="tema ${t[0]===at?"on":""}" style="--c:${t[3]}" title="${t[2]}" aria-label="${t[2]}" onclick="escolherTema('${t[0]}')"><img src="${MASCOTES[cab[t[0]]].cabeca}" alt=""></button>`).join("")}</div>`;
 }
 function inicio(){
   aplicarTema();
@@ -1527,9 +1535,10 @@ try{
     google.script.run.withSuccessHandler(b=>{ if(!b) nuvemOK = false; }).withFailureHandler(()=>{ nuvemOK = false; }).tts("Oi");
 }catch(e){}
 /* ---- mascotes: Maia (menina) e Teo (menino) ---- */
-var MASCOTES = {maia:{nome:"Maia", art:"a Maia", cabeca:"mascotes/maia-head.webp", inteiro:"mascotes/maia.webp"},
-                teo:{nome:"Teo", art:"o Teo", cabeca:"mascotes/teo-head.webp", inteiro:"mascotes/teo.webp"}};
-function mascoteId(){ const m = lerLS("mascote"); return MASCOTES[m] ? m : "maia"; }
+var MASCOTES = {maia:{nome:"Maia", art:"a Maia", cabeca:"maia-head.webp", inteiro:"maia.webp"},
+                teo:{nome:"Teo", art:"o Teo", cabeca:"teo-head.webp", inteiro:"teo.webp"},
+                capi:{nome:"Capi", art:"a Capi", cabeca:"capi-head.webp", inteiro:"capi.webp"}};
+function mascoteId(){ return ({algodao:"maia", oceano:"teo", floresta:"capi"})[temaAtual()] || "maia"; }
 function MC(){ return MASCOTES[mascoteId()]; }
 function aplicarMascote(){
   const c = MC(), m = document.getElementById("mascote"), sp = document.getElementById("spBia");
