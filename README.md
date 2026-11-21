@@ -1,16 +1,24 @@
-# Pequenos Gênios — versão com perfis individuais
+# Pequenos Gênios — PWA
 
-## Perfis
-- Maia: Mundo Algodão (rosa, branco e turquesa).
-- Teo: Mundo Galáxia (azul, roxo e amarelo).
-- Capi: Mundo Floresta (verde e tons naturais).
+Todos os arquivos ficam na mesma pasta (sem subpastas). O `index.html` precisa ficar na raiz do repositório.
 
-Cada perfil utiliza um espaço separado de progresso no mesmo aparelho. A criança escolhe o personagem na tela inicial; não existe seletor de temas nas atividades.
+## Publicar: GitHub + Cloudflare Pages
+1. No GitHub, crie um repositório e envie **todos os arquivos** deste ZIP (*Add file → Upload files*).
+2. No Cloudflare: *Workers & Pages → Create → Pages → Connect to Git* → escolha o repositório.
+3. Configuração do build: **Framework preset: None**, **Build command: (vazio)**, **Build output directory: `/`** (ou deixe em branco).
+4. *Save and Deploy*. O endereço será `https://nome.pages.dev` (https é necessário para instalar o app e usar offline).
 
-## Publicação
-1. Extraia todos os arquivos desta pasta.
-2. Publique a pasta inteira no Netlify (ou substitua os arquivos do deploy atual).
-3. Para atualizar uma instalação já aberta no celular, feche e abra novamente o app; se necessário, atualize a página para renovar o cache.
+Cada vez que você enviar uma alteração ao GitHub, o Cloudflare publica de novo sozinho.
 
-## Observação
-A seleção de perfil organiza os dados e a aparência por criança no aparelho. Ela não é um sistema de autenticação com senha nem impede que um adulto com acesso ao aparelho troque de perfil.
+## Instalar no celular
+- **Android (Chrome):** abra o endereço → menu ⋮ → *Instalar app*.
+- **iPhone (Safari):** Compartilhar → *Adicionar à Tela de Início*.
+Depois de aberto uma vez com internet, funciona sem internet.
+
+## Atualizar o app
+Troque os arquivos no GitHub e, no `sw.js`, aumente o número: `const VERSAO = "v11"` → `"v12"`. Os celulares atualizam na próxima abertura.
+
+## Observações
+- A voz é a do próprio aparelho.
+- Backup: Painel dos pais (segure o título "Pequenos Gênios" por 2 segundos) → *Salvar arquivo* / *Recuperar arquivo*.
+- Temas: Menina (Maia), Menino (Teo) e Neutro (Capi).
