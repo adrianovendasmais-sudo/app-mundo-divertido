@@ -510,6 +510,24 @@
   :root[data-tema="galaxia"] .card,:root[data-tema="galaxia"] #balao{background:#f6f8ff}
   :root[data-tema="galaxia"] #topo h1{color:var(--rosa-esc)}
   @media (max-height:700px){ .h-masc{max-height:220px} .h-nivel{width:68px} .h-nivel span{font-size:32px} }
+
+  /* fundo fixo: cores e enfeites parados */
+  #bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  #bg span{position:absolute !important;animation:none !important;transform:none !important;opacity:.85;filter:drop-shadow(0 4px 4px rgba(0,0,0,.12))}
+  body{background-attachment:fixed}
+  .h-masc,.sp-bia,#mascote,.emoji-grande{animation:none !important}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none}
+  :root:not([data-tema]) body::before,:root[data-tema="algodao"] body::before{
+    background:radial-gradient(46% 16% at 18% 6%,rgba(255,255,255,.75) 0 55%,transparent 62%),radial-gradient(40% 13% at 88% 30%,rgba(255,255,255,.6) 0 55%,transparent 62%),radial-gradient(50% 15% at 12% 66%,rgba(255,255,255,.55) 0 55%,transparent 62%)}
+  :root[data-tema="galaxia"] body::before{
+    background:
+      radial-gradient(2px 2px at 12% 22%,#fff 50%,transparent 55%),radial-gradient(2px 2px at 30% 8%,#fff 50%,transparent 55%),radial-gradient(1.5px 1.5px at 55% 18%,#fff 50%,transparent 55%),
+      radial-gradient(2px 2px at 72% 6%,#fff 50%,transparent 55%),radial-gradient(1.5px 1.5px at 90% 34%,#fff 50%,transparent 55%),radial-gradient(2px 2px at 22% 48%,#fff 50%,transparent 55%),
+      radial-gradient(1.5px 1.5px at 66% 58%,#fff 50%,transparent 55%),radial-gradient(2px 2px at 8% 74%,#fff 50%,transparent 55%),radial-gradient(1.5px 1.5px at 48% 86%,#fff 50%,transparent 55%),
+      radial-gradient(2px 2px at 82% 90%,#fff 50%,transparent 55%),radial-gradient(1.5px 1.5px at 38% 38%,#cfe 50%,transparent 55%),radial-gradient(1.5px 1.5px at 94% 70%,#cfe 50%,transparent 55%),
+      radial-gradient(70px 70px at 100% 62%,rgba(110,160,255,.55) 0 60%,transparent 68%),radial-gradient(40% 20% at 20% 110%,rgba(140,90,255,.4),transparent 70%)}
+  :root[data-tema="floresta"] body::before{
+    background:radial-gradient(46% 16% at 85% 4%,rgba(255,255,255,.55) 0 55%,transparent 62%),radial-gradient(60% 24% at 0% 100%,rgba(60,150,70,.35) 0 60%,transparent 66%),radial-gradient(50% 20% at 100% 96%,rgba(90,180,70,.3) 0 60%,transparent 66%)}
 </style>
 <script>
 /* aviso de erro: se algo falhar ao abrir, mostra o motivo na tela em vez de ficar em branco */
@@ -732,18 +750,17 @@ function gravarLS(k,v){ try{ localStorage.setItem(chaveLS(k),v); }catch(e){} }
 
 (function(){
   const bg = document.getElementById("bg");
-  const ITENS = {algodao:["💗","⭐","🌸","✨","💖","🦋"], galaxia:["🚀","⭐","🛰️","✨","🪐","🌙"], floresta:["🍃","🌿","🦋","🌳","🍀","🌼"]};
+  
+  const FIXOS = {
+    algodao:[["💗",8,16,26],["✨",87,11,24],["🌸",90,47,28],["💖",5,58,24],["🦋",84,74,30],["⭐",12,84,22]],
+    galaxia:[["⭐",9,12,20],["🪐",86,15,42],["✨",92,47,22],["🌙",6,54,30],["🚀",85,77,34],["⭐",14,82,18]],
+    floresta:[["🍃",8,13,26],["🦋",88,14,28],["🌿",92,50,30],["🍀",6,57,26],["🌳",85,78,36],["🌼",12,83,26]]};
   window.refazerFundo = function(){
-    const itens = ITENS[temaAtual()] || ITENS.algodao; bg.innerHTML = "";
-  for(let i=0;i<12;i++){
-    const s = document.createElement("span");
-    s.textContent = itens[i % itens.length];
-    s.style.left = (Math.random()*96)+"vw";
-    s.style.fontSize = (18+Math.random()*26)+"px";
-    s.style.animationDuration = (14+Math.random()*16)+"s";
-    s.style.animationDelay = (-Math.random()*20)+"s";
-    bg.appendChild(s);
-  }
+    bg.innerHTML = "";
+    (FIXOS[temaAtual()] || FIXOS.algodao).forEach(([e,x,y,t])=>{
+      const s = document.createElement("span"); s.textContent = e;
+      s.style.left = x+"vw"; s.style.top = y+"vh"; s.style.fontSize = t+"px"; bg.appendChild(s);
+    });
   };
 })();
 

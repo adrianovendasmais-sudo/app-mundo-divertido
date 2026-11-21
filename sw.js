@@ -1,6 +1,6 @@
 /* Service worker do Pequenos Gênios — funciona offline.
    Ao alterar qualquer arquivo do app, troque o número da VERSAO. */
-const VERSAO = "v12";
+const VERSAO = "v13";
 const CACHE = "pequenos-genios-" + VERSAO;
 const ARQUIVOS = [
   "./", "index.html", "manifest.webmanifest",
