@@ -1,11 +1,11 @@
 /* Service worker do Pequenos Gênios — funciona offline.
    Ao alterar qualquer arquivo do app, troque o número da VERSAO. */
-const VERSAO = "pg-mobile-v9";
+const VERSAO = "v12";
 const CACHE = "pequenos-genios-" + VERSAO;
 const ARQUIVOS = [
   "./", "index.html", "manifest.webmanifest",
   "fredoka-latin.woff2", "fredoka-latin-ext.woff2",
-  "maia.webp", "teo.webp", "capi.webp", "maia-head.webp", "teo-head.webp", "capi-head.webp",
+  "card-maia.webp", "card-teo.webp", "card-capi.webp", "maia.webp", "teo.webp", "capi.webp", "maia-head.webp", "teo-head.webp", "capi-head.webp",
   "icon-192.png", "icon-512.png", "maskable-512.png", "apple-touch-icon.png"
 ];
 self.addEventListener("install", e => {

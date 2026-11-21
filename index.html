@@ -18,57 +18,6 @@
 @font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fredoka-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'Fredoka';font-style:normal;font-weight:300 700;font-display:swap;src:url(fredoka-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
-  /* ===== visual 2.0: identidade por tema ===== */
-  :root[data-tema="oceano"]{--g1:#9fd6ff; --g2:#c2cdff; --g3:#aeeee4; --g4:#e3f1ff; --gbase:#eaf5ff; --fundo-a:#8fd0ff; --fundo-b:#5aaef0}
-  :root[data-tema="floresta"]{--g1:#bdeccb; --g2:#e4f2a8; --g3:#b6e6f5; --g4:#ffe9b3; --gbase:#f1fbea; --fundo-a:#a8e08f; --fundo-b:#5cc060}
-  :root:not([data-tema]),:root[data-tema="algodao"]{--g1:#ffbfdc; --g2:#dccbff; --g3:#ffd9c2; --g4:#ffe9f4; --gbase:#fff1f8; --fundo-a:#ffb3d4; --fundo-b:#ff86bb}
-  #app,#bia{position:relative;z-index:1}
-  body::after{content:"";position:fixed;left:-10%;right:-10%;bottom:-70px;height:170px;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(60% 100% at 18% 100%, var(--fundo-a) 0 62%, transparent 63%),
-      radial-gradient(55% 100% at 78% 100%, var(--fundo-b) 0 58%, transparent 59%);opacity:.55}
-  body.calmo::after{opacity:.3}
-  #topo{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-    border:1.5px solid rgba(255,255,255,.9);box-shadow:0 10px 26px -10px rgba(var(--rgb),.35)}
-  #mascote{width:112px;height:112px}
-  #bia{margin-top:10px}
-  #balao{box-shadow:0 10px 22px -10px rgba(var(--rgb),.35);border:1.5px solid rgba(255,255,255,.9)}
-  .missao,.temas{box-shadow:0 12px 26px -12px rgba(var(--rgb),.35)}
-  .temas span{line-height:1.1}
-  .tile{border-radius:34px;box-shadow:0 16px 26px -12px var(--b),inset 0 -6px 0 rgba(0,0,0,.08);font-size:clamp(21px,5.6vw,28px)}
-  .tile .ico{font-size:clamp(58px,16vw,80px);filter:drop-shadow(0 8px 8px rgba(0,0,0,.18))}
-  .tile small{font-size:14px;font-weight:600}
-  .tile:active{transform:scale(.95)}
-  /* telas de jogo: cartão ocupa a tela e centraliza */
-  body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:calc(100dvh - 270px);display:flex;flex-direction:column;justify-content:center}
-  .opcao{border:3px solid var(--rosa-claro);box-shadow:0 10px 0 -2px var(--rosa-claro),0 16px 24px -12px rgba(var(--rgb),.35)}
-  .opcao:active{transform:translateY(6px);box-shadow:0 4px 0 -2px var(--rosa-claro)}
-  /* abertura */
-  .sp-bia{position:relative;margin-bottom:22px}
-  .sp-bia::before{content:"";position:absolute;left:50%;top:52%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;
-    background:radial-gradient(circle,rgba(255,255,255,.95) 0 38%,rgba(255,255,255,.35) 62%,transparent 70%);z-index:-1}
-  .sp-bia img{height:260px}
-  @media (max-height:700px){ #mascote{width:88px;height:88px} .sp-bia img{height:200px} body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:0} }
-
-  #chamaPill{display:flex;align-items:center;gap:3px;padding:6px 10px;border-radius:40px;background:linear-gradient(135deg,#ffe3b3,#ffb27a);color:#7a3410;font-weight:700;font-size:16px;box-shadow:0 2px 10px rgba(255,138,61,.35)}
-  #chamaPill[hidden]{display:none}
-  #chamaPill b{font-size:18px}
-  #balao.aberto,.calmo #balao.aberto{-webkit-line-clamp:unset;display:block;overflow:visible}
-  @media (max-width:380px){ #chamaPill{padding:5px 8px;font-size:14px} #topo h1{font-size:15px} }
-
-  /* celular deitado: jogo cabe sem rolar */
-  @media (orientation:landscape) and (max-height:480px){
-    body[data-tela]:not([data-tela="inicio"]) #bia{display:none}
-    #topo h1{display:none} #topo{padding:4px 8px;margin-bottom:0;min-height:0}
-    body[data-tela]:not([data-tela="inicio"]) .progresso{display:none}
-    body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:0;padding:8px 14px;justify-content:flex-start}
-    .progresso{margin:0 0 2px;font-size:12px} .progresso span{font-size:14px}
-    .emoji-grande{font-size:clamp(38px,12vh,58px);line-height:1.05;margin:0}
-    .palavra{font-size:clamp(22px,7vh,32px);margin:2px 0}
-    .opcoes{gap:10px} .opcao{min-height:0;padding:6px 8px;font-size:clamp(30px,10vh,44px)}
-    .ouvir{padding:6px 14px;font-size:15px;margin-top:6px}
-    .tiles{grid-template-columns:repeat(4,1fr)}
-  }
 </style>
 <style>
   :root{
@@ -432,6 +381,135 @@
     .progresso{margin-bottom:6px}
     .traco{width:min(100%,440px,38dvh)}
   }
+  /* ===== visual 2.0: identidade por tema ===== */
+  :root[data-tema="oceano"]{--g1:#9fd6ff; --g2:#c2cdff; --g3:#aeeee4; --g4:#e3f1ff; --gbase:#eaf5ff; --fundo-a:#8fd0ff; --fundo-b:#5aaef0}
+  :root[data-tema="floresta"]{--g1:#8fdc9c; --g2:#cfe88a; --g3:#9fdcc8; --g4:#ffe9a8; --gbase:#e4f6d8; --fundo-a:#a8e08f; --fundo-b:#5cc060}
+  :root:not([data-tema]),:root[data-tema="algodao"]{--g1:#ffbfdc; --g2:#dccbff; --g3:#ffd9c2; --g4:#ffe9f4; --gbase:#fff1f8; --fundo-a:#ffb3d4; --fundo-b:#ff86bb}
+  #app,#bia{position:relative;z-index:1}
+  body::after{content:"";position:fixed;left:-10%;right:-10%;bottom:-70px;height:170px;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(60% 100% at 18% 100%, var(--fundo-a) 0 62%, transparent 63%),
+      radial-gradient(55% 100% at 78% 100%, var(--fundo-b) 0 58%, transparent 59%);opacity:.55}
+  body.calmo::after{opacity:.3}
+  #topo{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1.5px solid rgba(255,255,255,.9);box-shadow:0 10px 26px -10px rgba(var(--rgb),.35)}
+  #mascote{width:112px;height:112px}
+  #bia{margin-top:10px}
+  #balao{box-shadow:0 10px 22px -10px rgba(var(--rgb),.35);border:1.5px solid rgba(255,255,255,.9)}
+  .missao,.temas{box-shadow:0 12px 26px -12px rgba(var(--rgb),.35)}
+  .temas span{line-height:1.1}
+  .tile{border-radius:34px;box-shadow:0 16px 26px -12px var(--b),inset 0 -6px 0 rgba(0,0,0,.08);font-size:clamp(21px,5.6vw,28px)}
+  .tile .ico{font-size:clamp(58px,16vw,80px);filter:drop-shadow(0 8px 8px rgba(0,0,0,.18))}
+  .tile small{font-size:14px;font-weight:600}
+  .tile:active{transform:scale(.95)}
+  /* telas de jogo: cartão ocupa a tela e centraliza */
+  body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:calc(100dvh - 270px);display:flex;flex-direction:column;justify-content:center}
+  .opcao{border:3px solid var(--rosa-claro);box-shadow:0 10px 0 -2px var(--rosa-claro),0 16px 24px -12px rgba(var(--rgb),.35)}
+  .opcao:active{transform:translateY(6px);box-shadow:0 4px 0 -2px var(--rosa-claro)}
+  /* abertura */
+  .sp-bia{position:relative;margin-bottom:22px}
+  .sp-bia::before{content:"";position:absolute;left:50%;top:52%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.95) 0 38%,rgba(255,255,255,.35) 62%,transparent 70%);z-index:-1}
+  .sp-bia img{height:260px}
+  @media (max-height:700px){ #mascote{width:88px;height:88px} .sp-bia img{height:200px} body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:0} }
+
+  #chamaPill{display:flex;align-items:center;gap:3px;padding:6px 10px;border-radius:40px;background:linear-gradient(135deg,#ffe3b3,#ffb27a);color:#7a3410;font-weight:700;font-size:16px;box-shadow:0 2px 10px rgba(255,138,61,.35)}
+  #chamaPill[hidden]{display:none}
+  #chamaPill b{font-size:18px}
+  #balao.aberto,.calmo #balao.aberto{-webkit-line-clamp:unset;display:block;overflow:visible}
+  @media (max-width:380px){ #chamaPill{padding:5px 8px;font-size:14px} #topo h1{font-size:15px} }
+
+  /* celular deitado: jogo cabe sem rolar */
+  @media (orientation:landscape) and (max-height:480px){
+    body[data-tela]:not([data-tela="inicio"]) #bia{display:none}
+    #topo h1{display:none} #topo{padding:4px 8px;margin-bottom:0;min-height:0}
+    body[data-tela]:not([data-tela="inicio"]) .progresso{display:none}
+    body[data-tela]:not([data-tela="inicio"]) #app>.card{min-height:0;padding:8px 14px;justify-content:flex-start}
+    .progresso{margin:0 0 2px;font-size:12px} .progresso span{font-size:14px}
+    .emoji-grande{font-size:clamp(38px,12vh,58px);line-height:1.05;margin:0}
+    .palavra{font-size:clamp(22px,7vh,32px);margin:2px 0}
+    .opcoes{gap:10px} .opcao{min-height:0;padding:6px 8px;font-size:clamp(30px,10vh,44px)}
+    .ouvir{padding:6px 14px;font-size:15px;margin-top:6px}
+    .tiles{grid-template-columns:repeat(4,1fr)}
+  }
+
+  /* ================= visual 3.0: perfis Maia · Teo · Capi ================= */
+  :root{--hbg:rgba(255,255,255,.74); --ht:var(--texto); --hs:var(--suave); --navbg:rgba(255,255,255,.9); --navtx:var(--suave); --navat1:var(--rosa); --navat2:var(--lilas)}
+  :root[data-tema="galaxia"]{--rosa:#5b8cff; --rosa-esc:#2f5fe0; --rosa-claro:#dfe8ff; --lilas:#8f63f2; --rgb:47,95,224; --texto:#1f2a52; --suave:#5a6aa0;
+    --g1:#2b3fb8; --g2:#5b2fb0; --g3:#1c4fb8; --g4:#3a2a9a; --gbase:#121c60; --fundo-a:#1b2a8a; --fundo-b:#3a2a9a;
+    --hbg:rgba(120,150,255,.24); --ht:#fff; --hs:#d3dcff; --navbg:rgba(26,40,130,.88); --navtx:#cfd9ff; --navat1:#4f7bff; --navat2:#2f5fe0}
+  :root[data-tema="floresta"]{--hbg:rgba(255,255,240,.78); --navbg:rgba(255,250,222,.94); --navat1:#2fa84f; --navat2:#1f8a3c; --rosa:#2fbf7f}
+  :root[data-tema="galaxia"] .tag,:root[data-tema="galaxia"] .progresso{color:#fff}
+  /* abertura */
+  #splash{background:linear-gradient(180deg,#6ec0ff 0%,#a8dcff 45%,#e6f5ff 100%);overflow:hidden;padding:18px 12px}
+  #splash::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(40% 14% at 15% 12%,#fff 0 60%,transparent 62%),radial-gradient(34% 12% at 88% 22%,#fff 0 60%,transparent 62%),radial-gradient(50% 12% at 70% 82%,rgba(255,255,255,.8) 0 60%,transparent 62%),
+      radial-gradient(70% 22% at 20% 108%,#7fd36a 0 62%,transparent 64%),radial-gradient(60% 20% at 85% 110%,#4fb85a 0 62%,transparent 64%)}
+  .sp-in{position:relative;z-index:1;width:100%;max-width:560px}
+  .sp-logo{font-weight:700;line-height:.92;margin-bottom:14px}
+  .sp-logo .l1,.sp-logo .l2{display:block;paint-order:stroke fill}
+  .sp-logo .l1{font-size:clamp(40px,13vw,64px);color:#fff;-webkit-text-stroke:9px #1d4fa6;text-shadow:0 5px 0 #1d4fa6}
+  .sp-logo .l2{font-size:clamp(54px,18vw,86px);color:#ffc531;-webkit-text-stroke:10px #8a4312;text-shadow:0 6px 0 #8a4312}
+  .sp-logo i{font-style:normal;font-size:.7em;color:#ffd84a}
+  .sp-esc{font-size:clamp(20px,5.6vw,26px);font-weight:700;color:#173a7a;margin:6px 0 12px}
+  .sp-cards{display:flex;gap:8px;justify-content:center}
+  .sp-card{padding:0;border:0;background:none;width:calc((100% - 16px)/3);max-width:190px;border-radius:22px;overflow:hidden;line-height:0;
+    box-shadow:0 14px 24px -10px rgba(20,40,110,.55);transition:transform .15s}
+  .sp-card img{width:100%;height:auto;display:block}
+  .sp-card:active{transform:scale(.95)}
+  .sp-card.on{outline:4px solid #fff;outline-offset:-1px}
+  .sp-frase{display:inline-block;margin-top:18px;padding:8px 22px;border-radius:40px;background:rgba(255,255,255,.72);color:#1d4fa6;font-weight:600;font-size:clamp(16px,4.6vw,20px)}
+  .sp-perfis{margin:0 0 12px}
+  /* tela inicial */
+  body[data-tela="inicio"] #topo,body[data-tela="inicio"] #bia{display:none}
+  body.comnav main{padding-bottom:120px}
+  .home{display:flex;flex-direction:column;gap:12px}
+  .h-head{display:flex;align-items:center;gap:10px}
+  .h-avatar{width:62px;height:62px;border-radius:50%;object-fit:contain;background:var(--hbg);border:3px solid #fff;box-shadow:0 6px 14px -6px rgba(var(--rgb),.5);flex:none}
+  .h-ola{flex:1;min-width:0;background:var(--hbg);border-radius:22px;padding:8px 14px;color:var(--ht);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .h-ola b{display:block;font-size:clamp(19px,5.6vw,24px);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .h-ola span{display:block;font-size:13px;color:var(--hs);line-height:1.2;margin-top:2px}
+  .h-pill{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:30px;background:var(--hbg);color:var(--ht);font-weight:700;font-size:19px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .h-pill #hChama{font-size:15px;margin-right:4px;color:#ff9a3d} .h-pill #hChama[hidden]{display:none}
+  .h-gear{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navat1),var(--navat2));color:#fff;font-size:21px;box-shadow:0 8px 16px -6px rgba(var(--rgb),.6);flex:none}
+  .h-hero{display:flex;align-items:flex-end;gap:6px;margin-top:-4px}
+  .h-masc{width:42%;max-width:200px;height:auto;max-height:290px;object-fit:contain;filter:drop-shadow(0 14px 12px rgba(var(--rgb),.35));animation:flutua 3.2s ease-in-out infinite;flex:none}
+  .h-card{flex:1;display:flex;align-items:center;gap:8px;background:var(--hbg);color:var(--ht);border-radius:26px;padding:14px;border:1.5px solid rgba(255,255,255,.7);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin-bottom:22px;box-shadow:0 14px 26px -14px rgba(var(--rgb),.5)}
+  .h-prog{flex:1;min-width:0}
+  .h-prog b{font-size:18px}
+  .h-n{font-size:clamp(21px,6.4vw,28px);font-weight:700;margin:4px 0 8px;line-height:1.1}
+  .h-bar{height:12px;border-radius:12px;background:rgba(255,255,255,.55);overflow:hidden}
+  .h-bar i{display:block;height:100%;width:4%;border-radius:12px;background:linear-gradient(90deg,var(--navat1),var(--navat2));transition:width .6s}
+  .h-nivel{flex:none;width:76px;text-align:center;padding:8px 4px;border-radius:20px;background:linear-gradient(180deg,#fff6d0,#ffe28a);color:#7a4a0a;box-shadow:inset 0 0 0 2px #fff}
+  .h-nivel span{display:block;font-size:40px;line-height:1.05;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+  .h-nivel small{font-size:14px;font-weight:700}
+  .h-sec{display:flex;align-items:center;justify-content:space-between;color:var(--ht)}
+  .h-sec b{font-size:19px}
+  .h-sec button{background:none;color:var(--hs);font-size:15px;font-weight:600;padding:4px 6px}
+  .h-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .h-cat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 2px 8px;border-radius:22px;background:var(--hbg);color:var(--ht);border:1.5px solid rgba(255,255,255,.75);
+    box-shadow:0 10px 18px -12px rgba(var(--rgb),.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);min-width:0}
+  .h-cat .ic{font-size:clamp(30px,9.4vw,42px);line-height:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.18))}
+  .h-cat .tx{font-size:clamp(10px,3vw,13px);font-weight:700;max-width:100%;text-align:center;line-height:1.05;min-height:2.1em;display:flex;align-items:center;justify-content:center}
+  .h-cat:active{transform:scale(.94)}
+  /* menu de baixo */
+  #bnav{display:none;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:40;max-width:560px;margin:0 auto;gap:2px;padding:7px;border-radius:32px;
+    background:var(--navbg);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1.5px solid rgba(255,255,255,.85);box-shadow:0 18px 38px -10px rgba(var(--rgb),.55)}
+  body.comnav #bnav{display:flex}
+  #bnav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:58px;border-radius:26px;background:transparent;color:var(--navtx);padding:0 2px}
+  #bnav .i{font-size:24px;line-height:1} #bnav .t{font-size:clamp(11px,3.3vw,13px);font-weight:700;white-space:nowrap}
+  #bnav button.ativo{background:linear-gradient(135deg,var(--navat1),var(--navat2));color:#fff;box-shadow:0 8px 16px -6px rgba(var(--rgb),.7)}
+  /* perfil */
+  .perfil{text-align:center}
+  .p-masc{height:200px;width:auto;max-width:70%;object-fit:contain;filter:drop-shadow(0 10px 10px rgba(var(--rgb),.3))}
+  .p-info{color:var(--suave);font-weight:600;margin:2px 0 8px}
+  .p-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+  .perfil .temas{box-shadow:none;background:var(--rosa-claro)}
+  /* tema escuro (Teo): textos soltos sobre o fundo */
+  :root[data-tema="galaxia"]{--vidro:rgba(255,255,255,.95)}
+  :root[data-tema="galaxia"] .card,:root[data-tema="galaxia"] #balao{background:#f6f8ff}
+  :root[data-tema="galaxia"] #topo h1{color:var(--rosa-esc)}
+  @media (max-height:700px){ .h-masc{max-height:220px} .h-nivel{width:68px} .h-nivel span{font-size:32px} }
 </style>
 <script>
 /* aviso de erro: se algo falhar ao abrir, mostra o motivo na tela em vez de ficar em branco */
@@ -450,79 +528,17 @@
   window.addEventListener("unhandledrejection", function(e){ mostrar("promessa: "+((e.reason&&e.reason.message)||e.reason)); });
 })();
 </script>
-<style id="mobileFirstOverrides">
-:root[data-tema="oceano"]{--rosa:#2679e8;--rosa-esc:#164eb8;--rosa-claro:#dbeaff;--lilas:#7659d8;--rgb:35,105,210;--texto:#172e59;--suave:#526b9a;--g1:#c4e5ff;--g2:#d9d0ff;--g3:#a9dcff;--g4:#e7e0ff;--gbase:#edf4ff}
-:root[data-tema="floresta"]{--rosa:#269b50;--rosa-esc:#176b37;--rosa-claro:#d8f3d9;--lilas:#83bd43;--rgb:38,145,71;--texto:#21452a;--suave:#5c805d;--g1:#d3f1bf;--g2:#eff5c8;--g3:#c4e9b8;--g4:#fff0c9;--gbase:#f2f8e9}
-#topo{max-width:760px;margin:10px auto 0;width:calc(100% - 24px);padding:8px 12px;border-radius:22px}
-#topo h1{font-size:20px;line-height:1.02}#topo h1 br{display:none}
-#voltarBtn{width:42px;height:42px;font-size:21px}#estrelaPill{padding:4px 11px 4px 4px;gap:5px}
-#estrelaPill .anel{width:34px;height:34px}#estrelaPill .anel i{width:26px;height:26px;font-size:14px}
-#estrelaPill .n{font-size:19px}#somBtn{width:40px;height:40px;font-size:19px}
-#bia{display:none}
-main{max-width:760px;padding:12px 14px calc(100px + env(safe-area-inset-bottom))}
-.home-welcome{position:relative;min-height:136px;display:flex;align-items:center;overflow:hidden;padding:18px 110px 18px 18px;border-radius:26px;color:var(--texto);background:linear-gradient(115deg,rgba(255,255,255,.96),rgba(255,255,255,.68));border:1px solid white;box-shadow:0 10px 28px rgba(var(--rgb),.12)}
-.home-welcome:after{content:"";position:absolute;width:190px;height:190px;right:-58px;top:-70px;border-radius:50%;background:var(--g1);opacity:.75}
-.welcome-copy{position:relative;z-index:2}.welcome-kicker{font-size:10px;letter-spacing:.15em;font-weight:800;color:var(--rosa-esc)}
-.welcome-copy h2{font-size:26px;line-height:1.05;margin:5px 0;color:var(--texto)}.welcome-copy p{font-size:13px;line-height:1.3;margin:0;color:var(--suave);max-width:210px}
-.welcome-mascot{position:absolute;z-index:1;right:4px;bottom:-9px;width:130px;height:145px;object-fit:contain;filter:drop-shadow(0 7px 7px rgba(20,35,70,.14))}
-.progress-card{margin:12px 0 18px;padding:16px;border-radius:23px;background:rgba(255,255,255,.9);border:1px solid white;box-shadow:0 9px 24px rgba(var(--rgb),.12)}
-.progress-info{display:flex;align-items:center;gap:12px}.progress-info>div:first-child{flex:1;min-width:0}
-.progress-info small,.achievement-summary small{display:block;font-size:11px;letter-spacing:.1em;font-weight:800;color:var(--suave)}
-.progress-info strong,.achievement-summary strong{display:block;font-size:25px;margin:5px 0;color:var(--texto)}.progress-info strong span{font-size:14px}
-.progress-track{height:10px;border-radius:20px;background:var(--rosa-claro);overflow:hidden}.progress-track i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--rosa),var(--lilas))}
-.progress-info em{display:block;font-style:normal;font-size:10px;color:var(--suave);margin-top:6px}
-.progress-trophy{width:72px;min-height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:19px;background:linear-gradient(145deg,#fff4c8,#ffe2a0);font-size:36px;box-shadow:inset 0 0 0 1px #fff}
-.progress-trophy small{font-size:10px;letter-spacing:0;color:#79531c}
-.section-heading{display:flex;align-items:end;justify-content:space-between;margin:18px 2px 10px}
-.section-heading small{font-size:10px;letter-spacing:.14em;font-weight:800;color:var(--rosa-esc)}
-.section-heading h3{font-size:21px;margin:2px 0 0;color:var(--texto)}
-.section-heading>button{background:transparent;color:var(--rosa-esc);font-size:13px;font-weight:700;padding:8px 0}
-.missao{margin:0 0 13px;padding:10px;border-radius:18px;gap:7px}.missao b{font-size:12px}.missao .mi{width:38px;height:38px;font-size:20px}
-.activity-grid .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;grid-auto-rows:minmax(112px,auto)}
-.activity-grid .tile{min-height:112px;padding:13px 12px;border-radius:20px;font-size:17px;box-shadow:0 7px 16px -8px var(--b),inset 0 -3px 0 rgba(0,0,0,.06)}
-.activity-grid .tile .ico{font-size:39px;top:9px;right:10px}.activity-grid .tile small{font-size:11px;max-width:72%;line-height:1.2}
-.activity-grid .tile.largo{grid-column:span 2;min-height:88px}
-#navMobile{position:fixed;z-index:35;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));display:none;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;border-radius:23px;background:rgba(255,255,255,.93);border:1px solid white;box-shadow:0 10px 30px rgba(var(--rgb),.22);backdrop-filter:blur(18px)}
-#navMobile.visivel{display:grid}#navMobile button{min-width:0;min-height:54px;border-radius:17px;background:transparent;color:var(--suave);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:4px}
-#navMobile button span{font-size:22px;line-height:1.1}#navMobile button small{font-size:10px;font-weight:700}
-#navMobile button.ativo{background:linear-gradient(135deg,var(--rosa),var(--lilas));color:white;box-shadow:0 5px 12px rgba(var(--rgb),.2)}
-#splash.login-pg{position:fixed;inset:0;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:22px 16px calc(22px + env(safe-area-inset-bottom));background:radial-gradient(circle at 8% 0%,var(--g1),transparent 38%),radial-gradient(circle at 100% 100%,var(--g2),transparent 38%),var(--gbase)}
-.login-pg-shell{width:min(720px,100%);margin:auto}.login-pg-brand{text-align:center;margin:0 0 20px}
-.login-pg-star{font-size:20px;color:#ffc33c}.login-pg-logo{font-size:clamp(32px,8vw,43px);font-weight:800;letter-spacing:-.04em;color:#24416c;line-height:1.1}
-.login-pg-logo span{color:var(--rosa-esc)}.login-pg-brand p{font-size:14px;color:var(--suave);margin:7px 0 0}
-.login-pg-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.login-pg-card{display:flex;flex-direction:column;align-items:center;min-width:0;min-height:250px;padding:12px 9px;border-radius:24px;color:#fff;box-shadow:0 12px 24px rgba(35,50,90,.15);border:2px solid rgba(255,255,255,.8);overflow:hidden}
-.login-pg-card img{width:100%;height:clamp(100px,22vw,160px);object-fit:contain;margin:5px 0 0;filter:drop-shadow(0 7px 5px rgba(20,30,50,.16))}
-.login-pg-card strong{font-size:clamp(20px,5vw,27px);line-height:1.05;margin-top:3px}.login-pg-card small{font-size:10px;line-height:1.2;min-height:25px;margin-top:4px}
-.login-pg-tag{font-size:8px;font-weight:800;letter-spacing:.1em;padding:5px 7px;border-radius:30px;background:rgba(255,255,255,.22)}
-.login-pg-go{margin-top:auto;width:100%;padding:8px 3px;border-radius:13px;background:rgba(255,255,255,.94);color:#263a63;font-size:10px;font-weight:800;white-space:nowrap}
-.maia-card{background:linear-gradient(155deg,#ff9bce,#e9449b)}.teo-card{background:linear-gradient(155deg,#5ba6ff,#344fc4)}.capi-card{background:linear-gradient(155deg,#92d76b,#228b50)}
-.login-pg-foot{text-align:center;color:var(--suave);font-size:11px;margin:17px 0 0}
-.profile-sheet{position:relative;max-width:390px;margin:auto}.sheet-close{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:50%;background:var(--rosa-claro);color:var(--rosa-esc)}
-.profile-sheet-avatar{width:82px;height:82px;margin:0 auto 5px;border-radius:50%;background:var(--g1);display:grid;place-items:center}
-.profile-sheet-avatar img{width:75px;height:75px;object-fit:contain}.profile-sheet h2,.profile-sheet>p{text-align:center;margin:4px}
-.profile-sheet-stat{text-align:center;padding:12px;margin:14px 0;border-radius:16px;background:var(--gbase);font-weight:700}
-.profile-sheet-current{display:flex;align-items:center;gap:12px;padding:10px 14px;margin:12px 0 16px;border-radius:17px;background:var(--gbase)}
-.profile-sheet-current img{width:54px;height:54px;object-fit:contain}.profile-sheet-current b,.profile-sheet-current span{display:block}.profile-sheet-current span{font-size:12px;color:var(--suave)}
-.achievement-summary{display:flex;align-items:center;justify-content:space-between}.achievement-summary p{font-size:13px;color:var(--suave);margin:0}
-.achievement-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.achievement{padding:16px 10px;border-radius:19px;background:rgba(255,255,255,.75);border:1px solid white;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--suave)}
-.achievement span{font-size:34px;filter:grayscale(1);opacity:.45}.achievement b{font-size:14px;color:var(--texto)}.achievement small{font-size:11px}
-.achievement.earned{box-shadow:0 7px 18px rgba(var(--rgb),.12)}.achievement.earned span{filter:none;opacity:1}
-body[data-tela]:not([data-tela="inicio"]) main{padding-bottom:30px}
-@media(max-width:390px){#topo{margin-top:6px;padding:6px 8px}#topo h1{font-size:17px}.home-welcome{min-height:122px;padding:14px 96px 14px 14px}
-.welcome-copy h2{font-size:23px}.welcome-mascot{width:112px;height:128px;right:-2px}.progress-card{padding:13px}
-.activity-grid .tiles{gap:8px;grid-auto-rows:minmax(104px,auto)}.activity-grid .tile{min-height:104px;padding:11px;border-radius:17px;font-size:16px}
-.activity-grid .tile .ico{font-size:34px}.login-pg-cards{gap:7px}.login-pg-card{min-height:220px;padding:9px 6px;border-radius:19px}
-.login-pg-card small{font-size:9px}.login-pg-go{font-size:9px}}
-@media(max-width:340px){.login-pg-cards{grid-template-columns:1fr;max-width:280px;margin:auto}.login-pg-card{min-height:165px;display:grid;grid-template-columns:92px 1fr;grid-template-rows:auto auto auto;column-gap:8px;text-align:left}
-.login-pg-tag{grid-column:1/-1;justify-self:start}.login-pg-card img{grid-column:1;grid-row:2/4;height:90px}.login-pg-card strong,.login-pg-card small{grid-column:2}.login-pg-go{grid-column:1/-1;text-align:center}}
-</style>
 </head>
 <body>
 
 <div class="bg" id="bg"></div>
 
+<nav id="bnav" aria-label="Menu">
+  <button data-t="inicio" onclick="ir('inicio')"><span class="i">🏠</span><span class="t">Início</span></button>
+  <button data-t="atividades" onclick="ir('atividades')"><span class="i">🎮</span><span class="t">Atividades</span></button>
+  <button data-t="album" onclick="ir('album')"><span class="i">🏆</span><span class="t">Conquistas</span></button>
+  <button data-t="perfil" onclick="ir('perfil')"><span class="i">👤</span><span class="t">Meu Perfil</span></button>
+</nav>
 <header id="topo" class="vidro">
   <button id="voltarBtn" onclick="voltar()" aria-label="Voltar">⬅</button>
   <h1>Pequenos<br>Gênios</h1>
@@ -531,7 +547,7 @@ body[data-tela]:not([data-tela="inicio"]) main{padding-bottom:30px}
     <div class="anel" id="anel"><i>⭐</i></div>
     <div class="n" id="totalEstrelas">0</div>
   </div>
-  <button id="somBtn" onclick="abrirPainel()" aria-label="Configurações">⚙️</button>
+  <button id="somBtn" onclick="alternarSom()" aria-label="Som">🔊</button>
 </header>
 
 <section id="bia">
@@ -541,25 +557,19 @@ body[data-tela]:not([data-tela="inicio"]) main{padding-bottom:30px}
 </section>
 
 <main id="app"></main>
-<div id="splash" class="login-pg">
-  <div class="login-pg-shell">
-    <div class="login-pg-brand"><div class="login-pg-star">✦　⭐　✦</div>
-      <div class="login-pg-logo">Pequenos <span>Gênios</span></div>
-      <p>Escolha seu perfil para começar a aventura</p></div>
-    <div class="login-pg-cards">
-      <button class="login-pg-card maia-card" onclick="entrarPerfil('1')"><span class="login-pg-tag">MUNDO ALGODÃO</span><img src="maia.webp" alt="Maia"><strong>Maia</strong><small>Um mundo doce e encantador</small><span class="login-pg-go">Entrar no meu mundo　›</span></button>
-      <button class="login-pg-card teo-card" onclick="entrarPerfil('2')"><span class="login-pg-tag">MUNDO GALÁXIA</span><img src="teo.webp" alt="Teo"><strong>Teo</strong><small>Explorar, descobrir e aprender</small><span class="login-pg-go">Entrar no meu mundo　›</span></button>
-      <button class="login-pg-card capi-card" onclick="entrarPerfil('3')"><span class="login-pg-tag">MUNDO FLORESTA</span><img src="capi.webp" alt="Capi"><strong>Capi</strong><small>Natureza cheia de descobertas</small><span class="login-pg-go">Entrar no meu mundo　›</span></button>
+<div id="splash">
+  <div class="sp-in">
+    <div class="sp-logo"><span class="l1">Pequenos</span><span class="l2">Gênios <i>★</i></span></div>
+    <div class="sp-esc">Escolha seu perfil:</div>
+    <div class="sp-perfis" id="spPerfis"></div>
+    <div class="sp-cards" id="spCards">
+      <button class="sp-card" data-t="algodao" onclick="entrarPerfil('algodao')" aria-label="Maia, Mundo Algodão"><img src="card-maia.webp" alt="Maia"></button>
+      <button class="sp-card" data-t="galaxia" onclick="entrarPerfil('galaxia')" aria-label="Teo, Mundo Galáxia"><img src="card-teo.webp" alt="Teo"></button>
+      <button class="sp-card" data-t="floresta" onclick="entrarPerfil('floresta')" aria-label="Capi, Mundo Floresta"><img src="card-capi.webp" alt="Capi"></button>
     </div>
-    <p class="login-pg-foot">Cada criança tem seu próprio espaço e progresso ⭐</p>
+    <div class="sp-frase">Aprender também é uma aventura!</div>
   </div>
 </div>
-<nav id="navMobile" aria-label="Navegação principal">
-  <button class="ativo" data-tab="inicio" onclick="ir('inicio')"><span>⌂</span><small>Início</small></button>
-  <button data-tab="jogos" onclick="ir('jogos')"><span>🎮</span><small>Atividades</small></button>
-  <button data-tab="conquistas" onclick="telaConquistas()"><span>🏆</span><small>Conquistas</small></button>
-  <button data-tab="perfil" onclick="perfilInfantil()"><span>♙</span><small>Meu Perfil</small></button>
-</nav>
 <div id="modal"></div>
 <div id="confete"></div>
 
@@ -722,7 +732,7 @@ function gravarLS(k,v){ try{ localStorage.setItem(chaveLS(k),v); }catch(e){} }
 
 (function(){
   const bg = document.getElementById("bg");
-  const ITENS = {algodao:["💗","⭐","🌸","✨","💖","🦋"], oceano:["🚀","⭐","🛰️","✨","🔧","🪐"], floresta:["🍃","🌿","🦋","🌳","🍀","🌼"]};
+  const ITENS = {algodao:["💗","⭐","🌸","✨","💖","🦋"], galaxia:["🚀","⭐","🛰️","✨","🪐","🌙"], floresta:["🍃","🌿","🦋","🌳","🍀","🌼"]};
   window.refazerFundo = function(){
     const itens = ITENS[temaAtual()] || ITENS.algodao; bg.innerHTML = "";
   for(let i=0;i<12;i++){
@@ -785,6 +795,7 @@ var estrelas = parseInt(lerLS("estrelas_mundinho")||"0",10) || 0, mudo = false;
 function atualizarEstrelas(){
   document.getElementById("totalEstrelas").textContent = estrelas;
   document.getElementById("anel").style.setProperty("--p", (estrelas % 10) * 10);
+  try{ atualizarHome(); }catch(e){}
   try{ const n = sequenciaDias(), c = document.getElementById("chamaPill"); c.hidden = n < 2; document.getElementById("chamaN").textContent = (n>=30?"👑 ":n>=7?"🏅 ":"")+n; }catch(e){}
 }
 function chaveDia(d){ return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
@@ -985,13 +996,16 @@ function ir(t){
     try{ history.pushState({mundinho:1}, ""); noHistorico = true; }catch(e){}
   }
   document.getElementById("voltarBtn").style.display = (t==="inicio") ? "none" : "flex";
-  atualizarNavMobile(t==="inicio"?"inicio":t==="jogos"?"jogos":"");
   document.body.classList.toggle("calmo", t!=="inicio"); document.body.dataset.tela = t;
+  const comNav = ["inicio","atividades","album","perfil","grupo"].includes(t), ativoNav = t==="grupo" ? "atividades" : t;
+  document.body.classList.toggle("comnav", comNav);
+  document.querySelectorAll("#bnav button").forEach(b=>b.classList.toggle("ativo", b.dataset.t===ativoNav));
   ({ inicio:inicio,
      letras:()=>visualizador(V.tipo), vogais:()=>visualizador("vogais"), abc:()=>visualizador("abc"),
      tracar:()=>tracar(), nome:telaNome, jogos:hubJogos,
      jogo:()=>iniciarRodada("jogo"), numeros:()=>iniciarRodada("numeros"),
      cores:()=>iniciarRodada("cores"), formas:()=>iniciarRodada("formas"),
+     atividades:telaAtividades, perfil:telaPerfil, grupo:telaGrupo,
      inicial:()=>iniciarRodada("inicial"), silabas:()=>iniciarRodada("silabas"), quebra:telaQuebra, memoria:telaMemoria, album:telaAlbum,
      palavras:()=>iniciarRodada("palavras"), ditado:()=>iniciarRodada("ditado"), completa:()=>iniciarRodada("completa"),
      frases:()=>iniciarRodada("frases"), contas:()=>iniciarRodada("contas"), numeros100:()=>iniciarRodada("numeros100"),
@@ -1001,10 +1015,10 @@ function ir(t){
 
 /* ---- Início ---- */
 var PALETAS = {
-  algodao:[["#ff9fca","#f35b9f"],["#ffc0df","#f56eae"],["#f7a7d0","#e84d98"],["#ffd1e7","#f77fb5"],["#f6b5da","#e65b9d"],["#ffafd4","#ed6ba9"]],
-  oceano:[["#78b8ff","#3475e8"],["#9acbff","#526be0"],["#6fa7f7","#405acb"],["#b4d8ff","#5d8de9"],["#9db7ff","#6559d2"],["#83c8f7","#397bd2"]],
-  floresta:[["#8edb9b","#279a55"],["#b6e7a0","#4da84e"],["#83d4a2","#218b63"],["#c5e9a6","#5ba64c"],["#9cdda7","#338e55"],["#a9e1bd","#319b70"]]
-};
+  algodao:[["#ff9ec7","#ff5fa2"],["#ffb59e","#ff7a6b"],["#dcb8ff","#a56bf2"],["#ffc2dc","#f2749f"],["#ffd0a6","#ff9a55"],["#f5a9ec","#cf5fc0"]],
+  oceano:[["#8fd0ff","#3d9be8"],["#7ee6e0","#1fb5b0"],["#a9b8ff","#5b6fe0"],["#9ae0ff","#2aa9e0"],["#bcc9ff","#6b84f2"],["#86e3c8","#22b58f"]],
+  galaxia:[["#8fa8ff","#4f6df0"],["#b79bff","#7a4ff0"],["#7fd6ff","#2f9be0"],["#ff9bd2","#e0509c"],["#8ff0e0","#27b8a8"],["#ffd36b","#f0a020"]],
+  floresta:[["#a8e08f","#4fb83a"],["#ffd774","#f0a020"],["#7be3b2","#22b97c"],["#ffc690","#e8833a"],["#9fe0d8","#2aa89c"],["#d8ea7c","#9cbf2a"]]};
 function tilesHTML(lista){
   const pal = PALETAS[temaAtual()] || PALETAS.algodao;
   return `<div class="tiles pop">${lista.map((t,i)=>
@@ -1041,42 +1055,38 @@ function TILES5(){ return [
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
   ]; }
 function corTema(v){ try{ return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#ff5fa2"; }catch(e){ return "#ff5fa2"; } }
-var TEMAS = [["algodao","🌸","Mundo Algodão","#ff5fa2"],["oceano","🚀","Mundo Galáxia","#3a83ee"],["floresta","🌿","Mundo Floresta","#2fbf7f"]];
-function temaDoPerfil(id){ return ({"1":"algodao","2":"oceano","3":"floresta"})[String(id)] || "algodao"; }
-function temaAtual(){ return temaDoPerfil(PERFIL || "1"); }
+var TEMAS = [["algodao","👧","Maia","#ff5fa2"],["galaxia","👦","Teo","#5b6bf5"],["floresta","🌿","Capi","#2fbf7f"]];
+var MUNDOS = {algodao:{nome:"Mundo Algodão", sub:"Continue explorando seu mundo!", trofeu:"🏆"},
+              galaxia:{nome:"Mundo Galáxia", sub:"Hora de descobrir coisas incríveis!", trofeu:"🏆"},
+              floresta:{nome:"Mundo Floresta", sub:"Vamos explorar a natureza?", trofeu:"🌳"}};
+function temaAtual(){ let t = lerLS("tema") || "algodao"; t = ({oceano:"galaxia", sol:"floresta"})[t] || t; return TEMAS.some(x=>x[0]===t) ? t : "algodao"; }
 function aplicarTema(){
   aplicarMascote();
   const t = temaAtual(), el = document.documentElement;
   if(window.refazerFundo && el.dataset.tema !== t) setTimeout(refazerFundo, 0);
   if(t === "algodao") el.removeAttribute("data-tema"); else el.setAttribute("data-tema", t);
-  const m = document.getElementById("metaTema"); if(m) m.content = ({algodao:"#ffd9ec",oceano:"#cfe9ff",floresta:"#d3f5e3",sol:"#ffe0c8",galaxia:"#e2d6ff"})[t];
+  const m = document.getElementById("metaTema"); if(m) m.content = ({algodao:"#ffd9ec",oceano:"#cfe9ff",floresta:"#d3f5e3",sol:"#ffe0c8",galaxia:"#1b2a8a"})[t];
 }
-function escolherSplash(t){
-  gravarLS("tema", t); aplicarTema(); marcarSplash();
-}
+function entrarPerfil(t){ gravarLS("tema", t); aplicarTema(); comecar(); }
 function marcarSplash(){
   const at = temaAtual(), pl = perfisLista(), box = document.getElementById("spPerfis");
   if(box) box.innerHTML = pl.length > 1 ? pl.map(id=>`<button class="${id===PERFIL?"on":""}" onclick="escolherPerfilSplash('${id}')">${nomeDoPerfil(id) || "Criança "+id}</button>`).join("") : "";
-  document.querySelectorAll("#spTema button").forEach(b=>b.classList.toggle("on", b.dataset.t===at));
+  document.querySelectorAll("#spCards .sp-card").forEach(b=>b.classList.toggle("on", b.dataset.t===at));
 }
 function escolherPerfilSplash(id){
   gravarLS("perfil_atual", id); recarregarEstado(); marcarSplash();
 }
 function escolherTema(t){
-  gravarLS("tema", t); aplicarTema(); inicio();
+  gravarLS("tema", t); aplicarTema(); if(tela === "perfil") telaPerfil(); else inicio();
   bia("Oi! Eu sou "+MC().art+"! Vamos brincar?", "feliz");
 }
 function temaHTML(){
   const at = temaAtual();
-  const cab = {algodao:"maia", oceano:"teo", floresta:"capi"};
+  const cab = {algodao:"maia", galaxia:"teo", floresta:"capi"};
   return `<div class="temas pop"><span>Quem vai<br>brincar?</span>${TEMAS.map(t=>
     `<button class="tema ${t[0]===at?"on":""}" style="--c:${t[3]}" title="${t[2]}" aria-label="${t[2]}" onclick="escolherTema('${t[0]}')"><img src="${MASCOTES[cab[t[0]]].cabeca}" alt=""></button>`).join("")}</div>`;
 }
-function inicio(){
-  aplicarTema();
-  const rev = (function(){ try{ return revisaoSugerida(); }catch(e){ return null; } })();
-  const tileRev = rev ? [[rev, "Treinar de novo", MISSOES[rev][1]+" · vamos ficar craques!", "#ffd774", "#f0a020", "🎯", "largo"]] : [];
-  const listaAtividades = tileRev.concat(idade() === "5" ? TILES5() : [
+function TILES4(){ return [
     ["vogais","Vogais","A E I O U","#ff8fc1","#ff4f9a","🅰️","largo"],
     ["abc","Alfabeto","A a Z","#8fd0ff","#3d9be8","🔤"],
     ["tracar","Traçar","Escreva com o dedo","#ffb27a","#ff7a3d","✏️"],
@@ -1092,24 +1102,90 @@ function inicio(){
     ["padroes","Padrões","O que vem depois?","#ffa8a8","#ff6b6b","🔴"],
     ["quantidade","Mais ou menos","Qual tem mais?","#9fd8ff","#4aa8f0","⚖️"],
     ["album","Minhas figurinhas","A cada 10 estrelas, uma nova!","#ffe08a","#ffb81f","🦄","largo"]
-  ]);
-  const nivel=Math.floor(estrelas/25)+1, progresso=estrelas%25;
-  const saudacao=nome ? "Olá, "+formatarNome(nome).split(" ")[0]+"!" : "Olá, "+MC().nome+"!";
-  app.innerHTML=`<section class="home-welcome">
-    <div class="welcome-copy"><span class="welcome-kicker">${temaAtual()==="algodao"?"MUNDO ALGODÃO":temaAtual()==="oceano"?"MUNDO GALÁXIA":"MUNDO FLORESTA"}</span>
-    <h2>${saudacao}</h2><p>${temaAtual()==="algodao"?"Continue explorando seu mundo!":temaAtual()==="oceano"?"Pronto para uma nova descoberta?":"Vamos explorar a natureza?"}</p></div>
-    <img class="welcome-mascot" src="${MC().inteiro}" alt="${MC().nome}"></section>
-    <section class="progress-card"><div class="progress-info"><div><small>SEU PROGRESSO</small>
-    <strong>⭐ ${estrelas} <span>estrelas</span></strong><div class="progress-track"><i style="width:${progresso/25*100}%"></i></div>
-    <em>Nível ${nivel} · ${25-progresso} estrelas para o próximo</em></div><div class="progress-trophy">🏆<small>Nível ${nivel}</small></div></div></section>
-    <div class="section-heading"><div><small>SEU UNIVERSO</small><h3>Suas atividades</h3></div><button onclick="ir('jogos')">Ver todas　›</button></div>
-    ${missaoHTML()}<div class="activity-grid">${tilesHTML(listaAtividades)}</div>`;
-  atualizarNavMobile("inicio");
+  ]; }
+function listaTiles(){ return idade() === "5" ? TILES5() : TILES4(); }
+var GRUPOS = {
+  algodao:[["Linguagem","📕",["vogais","abc","tracar","nome","jogo","inicial","silabas","palavras","ditado","completa","rimas","nsilabas","frases"]],
+           ["Raciocínio","🧩",["numeros","numeros100","contas","quantidade","calendario","padroes"]],
+           ["Memória","🧠",["memoria"]], ["Diversão","⭐",["quebra","cores","formas","memoria"]]],
+  galaxia:[["Matemática","🔢",["numeros","numeros100","contas","quantidade","calendario"]],
+           ["Letras","🔤",["vogais","abc","tracar","nome","jogo","inicial","silabas","palavras","ditado","completa","rimas","nsilabas","frases"]],
+           ["Lógica","🧩",["padroes","quebra","memoria"]], ["Desafios","🏆",["cores","formas","padroes","memoria"]]],
+  floresta:[["Letras","🔤",["vogais","abc","tracar","nome","jogo","inicial","silabas","palavras","ditado","completa","rimas","nsilabas","frases"]],
+            ["Números","🔢",["numeros","numeros100","contas","quantidade","calendario"]],
+            ["Quebra-cabeça","🧩",["quebra"]], ["Descobertas","🔍",["cores","formas","padroes","memoria"]]]};
+var grupoAtual = null;
+function gruposTema(){ return GRUPOS[temaAtual()] || GRUPOS.algodao; }
+function jogosDoGrupo(g){ const ks = listaTiles().map(t=>t[0]); return g[2].filter(k=>ks.includes(k)); }
+function abrirGrupo(i){
+  const g = gruposTema()[i], js = jogosDoGrupo(g);
+  if(js.length === 1){ ir(js[0]); return; }
+  grupoAtual = i; ir("grupo");
+}
+function telaGrupo(){
+  const g = gruposTema()[grupoAtual == null ? 0 : grupoAtual], js = jogosDoGrupo(g), todos = listaTiles();
+  app.innerHTML = `<div class="palavra pop" style="text-align:center;margin:6px 0 10px;color:var(--ht)">${g[1]} ${g[0]}</div>` + tilesHTML(js.map(k=>todos.find(t=>t[0]===k)));
+  bia("Escolha uma brincadeira de "+g[0]+"!");
+}
+function telaAtividades(){
+  app.innerHTML = `<div class="palavra pop" style="text-align:center;margin:6px 0 10px;color:var(--ht)">🎮 Atividades</div>` + tilesHTML(listaTiles().filter(t=>t[0]!=="album"));
+  bia("Escolha uma brincadeira"+virgulaNome()+"!");
+}
+function nivelInfo(){ const n = Math.floor(estrelas/30) + 1, p = (estrelas % 30) / 30 * 100; return {n, p}; }
+function atualizarHome(){
+  const e = document.getElementById("hStars"); if(!e) return;
+  const v = nivelInfo(); e.textContent = estrelas;
+  const n = document.getElementById("hN"); if(n) n.textContent = estrelas + (estrelas===1 ? " estrela" : " estrelas");
+  const b = document.getElementById("hBar"); if(b) b.style.width = Math.max(4, v.p) + "%";
+  const l = document.getElementById("hNivel"); if(l) l.textContent = "Nível " + v.n;
+  try{ const d = sequenciaDias(), c = document.getElementById("hChama"); if(c){ c.hidden = d < 2; c.textContent = "🔥 " + d; } }catch(x){}
+}
+function inicio(){
+  aplicarTema();
+  const rev = (function(){ try{ return revisaoSugerida(); }catch(e){ return null; } })();
+  const tileRev = rev ? [[rev, "Treinar de novo", MISSOES[rev][1]+" · vamos ficar craques!", "#ffd774", "#f0a020", "🎯", "largo"]] : [];
+  const mc = MC(), mu = MUNDOS[temaAtual()] || MUNDOS.algodao;
+  const cats = gruposTema().map((g,i)=>`<button class="h-cat" onclick="abrirGrupo(${i})"><span class="ic">${g[1]}</span><span class="tx">${g[0]}</span></button>`).join("");
+  app.innerHTML = `<div class="home pop">
+    <div class="h-head">
+      <img class="h-avatar" src="${mc.cabeca}" alt="">
+      <div class="h-ola"><b>Olá, ${nome || mc.nome}!</b><span>${mu.sub}</span></div>
+      <div class="h-pill"><span id="hChama" hidden></span>⭐ <b id="hStars">0</b></div>
+      <button class="h-gear" onclick="abrirPainel()" aria-label="Configurações">⚙️</button>
+    </div>
+    <div class="h-hero">
+      <img class="h-masc" src="${mc.inteiro}" alt="${mc.nome}" onclick="cliqueBia()">
+      <div class="h-card">
+        <div class="h-prog"><b>Seu Progresso</b><div class="h-n">⭐ <span id="hN">0 estrelas</span></div><div class="h-bar"><i id="hBar"></i></div></div>
+        <div class="h-nivel"><span>${mu.trofeu}</span><small id="hNivel">Nível 1</small></div>
+      </div>
+    </div>
+    <div class="h-sec"><b>Suas Atividades</b><button onclick="ir('atividades')">Ver todas ›</button></div>
+    <div class="h-cats">${cats}</div>
+    ${missaoHTML()}
+    ${tileRev.length ? tilesHTML(tileRev) : ""}
+  </div>`;
+  atualizarHome();
   const frase = "Oi"+virgulaNome()+"! Eu sou "+MC().art+"! Vamos brincar e aprender juntos? Escolha uma brincadeira!";
-  if(!saudacaoFeita) bia(frase); else document.getElementById("balao").textContent = "Escolha uma brincadeira"+virgulaNome()+"!";
+  if(!saudacaoFeita) bia(frase);                       /* só fala na primeira vez */
+  else document.getElementById("balao").textContent = "Escolha uma brincadeira"+virgulaNome()+"!";
+}
+function telaPerfil(){
+  const mc = MC(), v = nivelInfo(), d = (function(){ try{ return sequenciaDias(); }catch(e){ return 0; } })();
+  app.innerHTML = `<div class="card pop perfil">
+    <img class="p-masc" src="${mc.inteiro}" alt="${mc.nome}" onclick="cliqueBia()">
+    <div class="palavra">${nome || mc.nome}</div>
+    <div class="p-info">Infantil ${idade()} · ⭐ ${estrelas} · Nível ${v.n}${d>=2 ? " · 🔥 "+d+" dias" : ""}</div>
+    ${temaHTML()}
+    <div class="p-btns">
+      <button class="acao sec peq" onclick="perguntarNome()">✏️ Meu nome</button>
+      <button class="acao sec peq" onclick="alternarSom();telaPerfil()">${document.getElementById("somBtn").textContent} Som</button>
+      <button class="acao sec peq" onclick="abrirPainel()">👨‍👩‍👧 Área dos pais</button>
+    </div></div>`;
+  bia("Este é o seu perfil"+virgulaNome()+"!");
 }
 function hubJogos(){
-  app.innerHTML = `<div class="section-heading"><div><small>VAMOS APRENDER</small><h3>Todas as atividades</h3></div></div><div class="activity-grid">` + tilesHTML([
+  app.innerHTML = tilesHTML([
     ["jogo","Qual vogal?","Ouça e escolha","#c4a6ff","#8f63f2","🎧"],
     ["inicial","Com qual letra?","Alfabeto todo","#f7a8e0","#e063c2","🔡"],
     ["silabas","Sílabas","BA BE BI BO BU","#a8e0ff","#3fb0f2","🧩"],
@@ -1118,8 +1194,7 @@ function hubJogos(){
     ["quebra","Quebra-cabeça","Monte a figura","#ffc2d9","#ff7aa8","🧸"],
     ["formas","Formas","Ache a forma","#ff9e9e","#ff6565","🔷"],
     ["memoria","Memória","Ache os pares","#b5e86f","#6cc23a","🃏"]
-  ]) + `</div>`;
-  atualizarNavMobile("jogos");
+  ]);
   bia("Escolha um jogo"+virgulaNome()+"!");
 }
 
@@ -1707,35 +1782,7 @@ try{
 var MASCOTES = {maia:{nome:"Maia", art:"a Maia", cabeca:"maia-head.webp", inteiro:"maia.webp"},
                 teo:{nome:"Teo", art:"o Teo", cabeca:"teo-head.webp", inteiro:"teo.webp"},
                 capi:{nome:"Capi", art:"a Capi", cabeca:"capi-head.webp", inteiro:"capi.webp"}};
-function mascoteId(){ return ({algodao:"maia", oceano:"teo", floresta:"capi"})[temaAtual()] || "maia"; }
-function entrarPerfil(id){
-  id=String(id);
-  try{let l=JSON.parse(localStorage.getItem("perfis")||"[]");if(!Array.isArray(l))l=[];if(!l.includes(id))l.push(id);localStorage.setItem("perfis",JSON.stringify(l));localStorage.setItem("perfil_atual",id);}catch(e){}
-  PERFIL=id;PREF=id==="1"?"":"p"+id+"_";gravarLS("tema",temaDoPerfil(id));recarregarEstado();
-  const s=document.getElementById("splash");if(s)s.remove();comecou=false;comecar();
-}
-function atualizarNavMobile(tab){
-  const n=document.getElementById("navMobile");if(!n)return;n.classList.toggle("visivel",!!comecou);
-  n.querySelectorAll("button").forEach(b=>b.classList.toggle("ativo",b.dataset.tab===tab));
-}
-function telaConquistas(){
-  tela="conquistas";document.body.dataset.tela="conquistas";
-  const nivel=Math.floor(estrelas/25)+1,marcos=[10,25,50,100,150,250];
-  app.innerHTML=`<div class="section-heading"><div><small>SUA JORNADA</small><h3>Conquistas</h3></div></div>
-  <section class="progress-card achievement-summary"><div><small>ESTRELAS CONQUISTADAS</small><strong>⭐ ${estrelas}</strong><p>Você está no nível ${nivel}. Continue explorando!</p></div><div class="progress-trophy">🏆<small>Nível ${nivel}</small></div></section>
-  <div class="achievement-grid">${marcos.map((m,i)=>`<article class="achievement ${estrelas>=m?"earned":""}"><span>${["⭐","🌟","🥉","🥈","🥇","👑"][i]}</span><b>${m} estrelas</b><small>${estrelas>=m?"Conquistada!":"Continue aprendendo"}</small></article>`).join("")}</div>`;
-  atualizarNavMobile("conquistas");window.scrollTo(0,0);
-}
-function perfilInfantil(){
-  const modal=document.getElementById("modal");
-  modal.innerHTML=`<div class="card profile-sheet pop"><button class="sheet-close" onclick="fecharModal()">✕</button>
-  <div class="profile-sheet-avatar"><img src="${MC().cabeca}" alt=""></div><h2>${nome||MC().nome}</h2><p>Seu espaço de aprendizagem</p>
-  <div class="profile-sheet-stat">⭐ ${estrelas} estrelas　·　Nível ${Math.floor(estrelas/25)+1}</div>
-  <div class="profile-sheet-current"><img src="${MC().inteiro}" alt=""><div><b>Seu universo</b><span>${temaAtual()==="algodao"?"Mundo Algodão":temaAtual()==="oceano"?"Mundo Galáxia":"Mundo Floresta"}</span></div></div>
-  <button class="acao sec peq" onclick="fecharModal();abrirPainel()">Área dos responsáveis</button></div>`;
-  modal.classList.add("on");atualizarNavMobile("perfil");
-}
-
+function mascoteId(){ return ({algodao:"maia", galaxia:"teo", floresta:"capi"})[temaAtual()] || "maia"; }
 function MC(){ return MASCOTES[mascoteId()]; }
 function aplicarMascote(){
   const c = MC(), m = document.getElementById("mascote"), sp = document.getElementById("spBia");

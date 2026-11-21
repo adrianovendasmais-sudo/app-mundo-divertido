@@ -16,7 +16,7 @@ Cada vez que você enviar uma alteração ao GitHub, o Cloudflare publica de nov
 Depois de aberto uma vez com internet, funciona sem internet.
 
 ## Atualizar o app
-Troque os arquivos no GitHub e, no `sw.js`, aumente o número: `const VERSAO = "v11"` → `"v12"`. Os celulares atualizam na próxima abertura.
+Troque os arquivos no GitHub e, no `sw.js`, aumente o número: `const VERSAO = "v12"` → `"v13"`. Os celulares atualizam na próxima abertura.
 
 ## Observações
 - A voz é a do próprio aparelho.
